@@ -1,0 +1,20 @@
+{
+  "name": "watch-my-farm",
+  "version": "0.1.0",
+  "description": "A farm sitting app - a way to keep track of things that need to be done around the farm while you are on vacation",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sssharkie1/watch-my-farm.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sssharkie1/watch-my-farm/issues"
+  },
+  "homepage": "https://github.com/sssharkie1/watch-my-farm#readme"
+}
