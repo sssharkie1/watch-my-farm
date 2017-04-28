@@ -4,8 +4,10 @@ module.exports = function(sequelize, DataTypes) {
     email: DataTypes.STRING,
     homePhone: DataTypes.STRING,
     cellPhone: DataTypes.STRING,
-    emergency: DataTypes.STRING,
-    vetInfo: DataTypes.STRING,
+    emergencyName: DataTypes.STRING,
+    emergencyNumber: DataTypes.STRING,
+    vetName: DataTypes.STRING,
+    vetNumber: DataTypes.STRING,    
     Notes: DataTypes.STRING,
 
   },
