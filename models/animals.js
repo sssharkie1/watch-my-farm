@@ -4,13 +4,43 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull:false
     },
-    animalName: DataTypes.STRING,
-    animalBreed_Desc: DataTypes.STRING,
-    location: DataTypes.STRING,
-    AMFood: DataTypes.STRING,
-    PMFood: DataTypes.STRING,
-    Medication: DataTypes.STRING,
-    Notes: DataTypes.STRING,
+    animalName: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    animalBreed_Desc: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    location: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    AMFood: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    PMFood: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    AMMeds: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    PMMeds: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },    
+    AMNotes: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    AMNotes: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },    
+    //timestamps: false,
 
   },
     {
@@ -34,3 +64,4 @@ module.exports = function(sequelize, DataTypes) {
 
   return animals;
 };
+
