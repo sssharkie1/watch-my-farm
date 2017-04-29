@@ -1,7 +1,7 @@
 {
   "development": {
-    "username": "sstevens",
-    "password": "Larryland102!",
+    "username": "root",
+    "password": "root",
     "database": "farmDB",
     "host": "localhost",
     "dialect": "mysql"
