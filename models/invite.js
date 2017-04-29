@@ -1,8 +1,18 @@
 module.exports = function(sequelize, DataTypes) {
   var invite = sequelize.define("invite", {
-    startDate: DataTypes.DATEONLY,
-    endDate: DataTypes.DATEONLY,
-    magicalLink: DataTypes.STRING,
+    startDate: {
+      type: DataTypes.DATEONLY,
+      allowNull: true
+    },
+    endDate: {
+      type: DataTypes.DATEONLY,
+      allowNull: true
+    },
+    magicalLink: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+        //timestamps: false,    
   },
     {
 

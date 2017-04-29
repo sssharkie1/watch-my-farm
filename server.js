@@ -4,6 +4,7 @@
 // ******************************************************************************
 // *** Dependencies
 // =============================================================
+var Sequelize= require("sequelize");
 var express = require("express");
 var bodyParser = require("body-parser");
 var exphbs = require("express-handlebars");
@@ -61,8 +62,8 @@ app.use(flash());
 app.use(express.static("./public"));
 
 // Routes =============================================================
-require("./routes/htmlRoutes.js")(app);
-require("./routes/apiRoutes.js")(app);
+require("./routes/html-routes.js")(app);
+require("./routes/api-routes.js")(app);
 
 // Syncing our sequelize models and then starting our express app
 

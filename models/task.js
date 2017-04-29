@@ -1,10 +1,18 @@
 module.exports = function(sequelize, DataTypes) {
   var task = sequelize.define("task", {
-    amTasks: DataTypes.STRING,
-    pmTasks: DataTypes.STRING,
+    amTasks: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    pmTasks: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     complete: {
       type: DataTypes.BOOLEAN, 
-      defaultValue: false},
+      defaultValue: false
+    },
+        //timestamps: false,  
   },
     {
 

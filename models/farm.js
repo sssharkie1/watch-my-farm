@@ -18,17 +18,44 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull:false
     },
-    address: DataTypes.STRING,
-    email: DataTypes.STRING,
-    homePhone: DataTypes.STRING,
-    cellPhone: DataTypes.STRING,
-    emergency: DataTypes.STRING,
-    vetInfo: DataTypes.STRING,
-    Notes: DataTypes.STRING,
+    address: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+
+    homePhone: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+
+    cellPhone: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    emergencyName: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    emergencyNumber: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    vetName: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    vetNumber: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },    
+    Notes: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+        //timestamps: false,    
 
   },
      {
-
       classMethods: {
         associate: function(models) {
           farm.hasMany(models.animals, {
