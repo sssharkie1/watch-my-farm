@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>{{title}}</title>
+
+	<!-- Bootstrap core CSS -->
+    <link href="/assets/ext/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+	 <div class = "container">
+
+	 	{{!-- Post flash messages here --}}
+        {{#if success_msg}}
+            <div class = "alert alert-success">{{success_msg}}</div>
+        {{/if}}
+        {{#if error_msg}}
+            <div class = "alert alert-danger">{{error_msg}}</div>
+        {{/if}}
+        {{#if error}}
+            <div class = "alert alert-danger">{{error}}</div>
+        {{/if}}
+        
+    
+
+        {{{body}}}
+
+	 </div>
+
+	  <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="/assets/ext/bootstrap/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>

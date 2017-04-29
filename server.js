@@ -6,11 +6,15 @@
 // =============================================================
 var express = require("express");
 var bodyParser = require("body-parser");
+var exphbs = require("express-handlebars");
 var expressValidator = require("express-validator");
 var cookieParser = require("cookie-parser");
 var session = require("express-session");
 var passport = require("passport");
 var flash = require("connect-flash");
+
+// Requiring passport as we've configured it
+/*var passport = require("./config/passport");*/
 
 // Sets up the Express App
 // =============================================================

@@ -1,0 +1,29 @@
+{{!-- Here we are looping through the errors from the apiRoutes and displaying them to the user using bootstrap alerts --}}
+{{#if errors}}
+	{{#each errors}}
+		<div class = "alert alert-danger">{{msg}}</div>
+	{{/each}}
+{{/if}}
+
+<div class = "row">
+	<div class = "col-md-offset-4 col-md-4">
+		<form class= "signup-form" method = "post" action = "/signup">
+			<div class="form-group">
+		        <label for="email">Email address</label>
+		        <input type="email" class="form-control input-lg" name = "useremail" id="useremail" placeholder="Email">
+		    </div>
+		    <div class="form-group">
+		        <label for="password">Password</label>
+		        <input type="password" class="form-control input-lg" name="password" id="password" placeholder="Password">
+		    </div>
+
+		     <button type="submit" class="btn btn-primary center-block">SIGN UP</button>
+			
+			<br >
+			<p class ="text-center">Already have an account?<a href="/login">&nbsp; Log in here</a></p>
+		     <p class ="text-center"><a href="/">&nbsp; WatchMFarm Home</a></p>
+
+		</form>
+		
+	</div><!-- ./col-md -->
+</div> <!-- ./row -->
