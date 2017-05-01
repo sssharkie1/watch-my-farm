@@ -18,6 +18,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull:false
     },
+    farmName: {
+      type: DataTypes.STRING,
+      allowNull:false
+    },
     address: {
       type: DataTypes.STRING,
       allowNull: true

@@ -1,10 +1,10 @@
 <div class = "row">
 	<div class="col-md-offset-4 col-sm-4 col-md-4">
 		
-			<form method = "post" action = "/login">
+			<form class="login-form" method = "post" action = "/auth/login">
 				<div class="form-group">
 			        <label for="email">Email address</label>
-			        <input type="email" class="form-control input-lg" name = "useremail" id="useremail" placeholder="Email">
+			        <input type="email" class="form-control input-lg" name ="useremail" id="useremail" placeholder="Email Address">
 			    </div>
 			    <div class="form-group">
 			        <label for="password">Password</label>
@@ -16,9 +16,5 @@
 			</form>
 
 			<br />
-			<p class ="text-center">Don't have an account?<a href="/signup">&nbsp; Sign Up</a></p>
-
-			<p class ="text-center"><a href="/">&nbsp; Magic Prawns Home</a></p>
-
-		
+			<p class ="text-center">First time here?<a class = 'btn btn-primary' href="/auth/signup">CREATE AN ACCOUNT</a></p>	
 	</div> 

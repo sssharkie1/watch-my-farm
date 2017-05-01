@@ -57,9 +57,20 @@ app.use(expressValidator({
 
 //connect flash - Flash is a special area of session used for storing meassages. Messages are written to the flash and cleared after being displayed to the user. 
 app.use(flash());
+app.use(function(req, res, next){
+  //setting global vars
+  res.locals.success_msg = req.flash("success_msg");
+  res.locals.error_msg = req.flash("error_msg");
+  res.locals.error = req.flash("error");
+  res.locals.user = req.user || null;
+  next();
+});
 
 // Static directory
 app.use(express.static("./public"));
+// Setting handlebars
+app.engine("handlebars", exphbs({defaultLayout: "useraccount"}));
+app.set("view engine", "handlebars");
 
 // Routes =============================================================
 require("./routes/html-routes.js")(app);
@@ -67,7 +78,7 @@ require("./routes/api-routes.js")(app);
 
 // Syncing our sequelize models and then starting our express app
 
-db.sequelize.sync().then(function() {
+db.sequelize.sync({force:true}).then(function() {
   app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
   });
