@@ -1,150 +1,180 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>WatchMyFarm - BarnYard</title>
+	<title>BarnYard</title>
+	
+	<!-- Reset CSS -->
+	<link href="assets/css/reset.css" rel="stylesheet">
 
 	<!-- Bootstrap core CSS -->
     <link href="assets/ext/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	
+	<!-- Custom fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Maiden+Orange|Montserrat|Passion+One" rel="stylesheet">
+	
+	<!-- Custom CSS -->	
+	<link href="assets/css/style.css" rel="stylesheet">
 
 </head>
 <body>
 
-	<header>
-        <nav class = "navbar navbar-default">
-            <div class = "container-fluid">
-                <div class = "navbar-header">
-                    <h2>WATCH MY FARM</h2>
-                </div><!-- ./navbar-header -->
-            </div><!-- ./container-fluid -->
-        </nav><!-- ./navbar navbar-default -->
-    </header>
+	<div class="container-fluid">
+		
+		<div class="row back-teal">
+			<header>
+				<div class="back-teal">
+					<div class="col-sm-5 col-sm-offset-1">
+						<div id="logo"> WATCH MY FARM </div>
+					</div>
+					<div class="col-sm-5">
+						<button id="logout" class="pull-right"> LOGOUT </button>
+					</div>
+				</div><!-- ./col-sm-5 -->
+			</header>
+		</div><!-- ./row back-teal -->
 
-    <main>
-    	<div class = "container">
-    		<div class="panel panel-primary animals-list">
-	      		<div class="panel-heading">
-	      			<h3 class = "panel-title text-center">BARNYARD</h3>
-	      		</div>
+		<div class="row">
+			<div class="col-sm-2 col-sm-offset-1 back-orange">
+				<ul class="text-center">
+					<li> <h3> <a class="sid-nav-link" href="barnyard.html"><i class="fa fa-paw fa-2x" aria-hidden="true"></i><br> BARNYARD </a> </h3> </li>
+					<li> <h3> <a class="sid-nav-link" href="farmInfo.html"><i class="fa fa-home fa-2x" aria-hidden="true"></i><br> MY FARM </a> </h3> </li>
+					<li> <h3> <a class="sid-nav-link" href="schedule.html"><i class="fa fa-calendar fa-2x" aria-hidden="true"></i><br> SCHEDULE </a> </h3> </li>
+					<li> <h3> <a class="sid-nav-link" href="https://www.paypal.com/" target="_blank"><i class="fa fa-usd fa-2x" aria-hidden="true"></i><br> PAYMENT </a> </h3> </li>
+				</ul>
+			</div><!-- ./col-sm-2 col-sm-offset-1 back-orange -->
 
-	      		<div class = "panel-body">
-		     		 <!--Table-->
-		     		 <table class="table table-hover" id="animals-table">
-					    <thead>
-					      <tr>
-					        <th>Animal</th>
-					        <th>Name</th>
-					        <th>AM Feed</th>
-					        <th>PM Feed</th>
-					        <th>Meds</th>
-					        <th>Notes</th>
-					      </tr>
-					    </thead>
-					    <tbody>
-					 
-					    </tbody>
-		 			 </table>
-	 			 </div>
-    		</div><!-- ./animals-list-->
+			<div class="col-sm-8">
+				<div class="main-area">
+					<h1 class="back-orange no-top-marg"> BARNYARD </h1>
+					<div id="animals-table">
+			     		 <!--Table-->
+			     		 <table class="table table-hover" id="animals-table">
+						    <thead>
+						      <tr>
+						        <th>Animal</th>
+						        <th>Name</th>
+						        <th>AM Feed</th>
+						        <th>PM Feed</th>
+						        <th>Meds</th>
+						        <th>Notes</th>
+						      </tr>
+						    </thead>
+						    <tbody>
+						 
+						    </tbody>
+			 			 </table>
+				 			 
+			    		
 
-			<div class = "text-center">
-    			<button type="button" class = "btn btn-primary text-center" id = "addanimal" data-toggle="modal" data-target="#addAnimal"><i class="fa fa-plus fa-lg" aria-hidden="true"></i>ADD ANIMAL</button>
-    		</div><!-- ./text-center -->
+						<div class = "text-center">
+			    			<button type="button" class = "btn btn-primary text-center" id = "addanimal" data-toggle="modal" data-target="#addAnimal"><i class="fa fa-plus fa-lg" aria-hidden="true"></i>&nbsp; ADD ANIMAL</button>
+			    		</div><!-- ./text-center -->
+					</div><!-- ./animals-table -->
+					<!-- Add New Animal - Modal -->
+			    	<div class="modal fade" id="addAnimal" tabindex="-1" role="dialog">
+			      		<div class="modal-dialog modal-lg" role="document">
 
-    	</div><!-- ./container -->
+							<div class="modal-content">
+			          			<div class="modal-header">
+			          				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			            			<h4 class="modal-title">Add Animal</h4>
+			          			</div><!-- ./modal-header -->
+			          			<div class="modal-body">
 
+									<div class = "alert alert-danger" id="error-div"></div>
 
-    	<!-- Add New Animal - Modal -->
-    	<div class="modal fade" id="addAnimal" tabindex="-1" role="dialog">
-      		<div class="modal-dialog modal-lg" role="document">
+									<form id="addAnimal-form">
+										 <div class="form-group">
+			                   			 	<label for="animal-type">Animal Type</label>
+			                    			<input type="text" class="form-control" id="animal-type" name = "animal-type" placeholder="eg: Horse" required> 
+			                 			 </div>
 
-				<div class="modal-content">
-          			<div class="modal-header">
-          				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            			<h4 class="modal-title">Add Animal</h4>
-          			</div><!-- ./modal-header -->
-          			<div class="modal-body">
+			                 			 <div class="form-group">
+			                   			 	<label for="animal-name">Name</label>
+			                    			<input type="text" class="form-control" id="animal-name" name = "animal-name" placeholder="Fiona"> 
+			                 			 </div>
 
-						<div class = "alert alert-danger" id="error-div"></div>
+			                 			 <div class="form-group">
+			                   			 	<label for="animal-breed">Animal Breed</label>
+			                    			<input type="text" class="form-control" id="animal-breed" name = "animal-breed" placeholder="eg: American Quarter Horse"> 
+			                 			 </div>
 
-						<form id="addAnimal-form">
-							 <div class="form-group">
-                   			 	<label for="animal-type">Animal Type</label>
-                    			<input type="text" class="form-control" id="animal-type" name = "animal-type" placeholder="eg: Horse" required> 
-                 			 </div>
+			                 			 <div class="form-group">
+			                   			 	<label for="location">Location</label>
+			                    			<input type="text" class="form-control" id="location" name = "location" placeholder="Location" required> 
+			                 			 </div>
 
-                 			 <div class="form-group">
-                   			 	<label for="animal-name">Name</label>
-                    			<input type="text" class="form-control" id="animal-name" name = "animal-name" placeholder="Fiona"> 
-                 			 </div>
+			                 			 <div class="form-group">
+			                   			 	<label for="am-food">AM Food</label>
+			                    			<input type="text" class="form-control" id="am-food" name = "am-food" placeholder="AM Food"> 
+			                 			 </div>
 
-                 			 <div class="form-group">
-                   			 	<label for="animal-breed">Animal Breed</label>
-                    			<input type="text" class="form-control" id="animal-breed" name = "animal-breed" placeholder="eg: American Quarter Horse"> 
-                 			 </div>
+			                 			 <div class="form-group">
+			                   			 	<label for="pm-food">PM Food</label>
+			                    			<input type="text" class="form-control" id="pm-food" name = "pm-food" placeholder="PM Food"> 
+			                 			 </div>
 
-                 			 <div class="form-group">
-                   			 	<label for="location">Location</label>
-                    			<input type="text" class="form-control" id="location" name = "location" placeholder="Location" required> 
-                 			 </div>
+			                 			 <div class="form-group">
+			                   			 	<label for="am-meds">AM Medications</label>
+			                    			<input type="text" class="form-control" id="am-meds" name = "am-meds" placeholder="AM Medications"> 
+			                 			 </div>
 
-                 			 <div class="form-group">
-                   			 	<label for="am-food">AM Food</label>
-                    			<input type="text" class="form-control" id="am-food" name = "am-food" placeholder="AM Food"> 
-                 			 </div>
+			                 			 <div class="form-group">
+			                   			 	<label for="pm-meds">PM Medications</label>
+			                    			<input type="text" class="form-control" id="pm-meds" name = "pm-meds" placeholder="PM Medications"> 
+			                 			 </div>
 
-                 			 <div class="form-group">
-                   			 	<label for="pm-food">PM Food</label>
-                    			<input type="text" class="form-control" id="pm-food" name = "pm-food" placeholder="PM Food"> 
-                 			 </div>
+			                 			 <div class="form-group">
+			                   			 	<label for="am-notes">AM Notes</label>
+			                    			<input type="text" class="form-control" id="am-notes" name = "am-notes" placeholder="AM Notes"> 
+			                 			 </div>
 
-                 			 <div class="form-group">
-                   			 	<label for="am-meds">AM Medications</label>
-                    			<input type="text" class="form-control" id="am-meds" name = "am-meds" placeholder="AM Medications"> 
-                 			 </div>
+			                 			 <div class="form-group">
+			                   			 	<label for="pm-notes">PM Notes</label>
+			                    			<input type="text" class="form-control" id="pm-notes" name = "pm-notes" placeholder="PM Food"> 
+			                 			 </div>
 
-                 			 <div class="form-group">
-                   			 	<label for="pm-meds">PM Medications</label>
-                    			<input type="text" class="form-control" id="pm-meds" name = "pm-meds" placeholder="PM Medications"> 
-                 			 </div>
+										<button type="submit" class="btn btn-primary">SAVE</button>
+						
+									</form>
 
-                 			 <div class="form-group">
-                   			 	<label for="am-notes">AM Notes</label>
-                    			<input type="text" class="form-control" id="am-notes" name = "am-notes" placeholder="AM Notes"> 
-                 			 </div>
+			          			</div><!-- ./modal-body -->
 
-                 			 <div class="form-group">
-                   			 	<label for="pm-notes">PM Notes</label>
-                    			<input type="text" class="form-control" id="pm-notes" name = "pm-notes" placeholder="PM Food"> 
-                 			 </div>
+			          			<div class="modal-footer">
+			            			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			          			</div><!-- ./modal-footer -->
 
-							<button type="submit" class="btn btn-primary">SAVE</button>
-			
-						</form>
+			          		</div><!-- ./modal-content -->
 
-          			</div><!-- ./modal-body -->
+			      		</div><!-- ./modal-dialog -->
+			      	</div><!-- ./modal fade -->
+				</div><!-- ./main-area -->
+			</div><!-- ./col-sm-8 -->
 
-          			<div class="modal-footer">
-            			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          			</div><!-- ./modal-footer -->
+		</div><!-- ./row -->
+		<div class="row">
+			<div class="footer">
+				<p class="light-text"> © Watch My Farm 2017 | GITHUB </p>
+			</div>
+		</div><!-- ./row -->
 
-          		</div><!-- ./modal-content -->
-
-      		</div><!-- ./modal-dialog -->
-      	</div><!-- ./modal fade -->
-    </main>
+	</div><!-- ./container-fluid -->
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="assets/ext/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/8491a9bbb1.js"></script>
 
     <!-- Custom Script-->
     <script type="text/javascript" src="assets/javascript/app.js"></script>
+
 
 </body>
 </html>
