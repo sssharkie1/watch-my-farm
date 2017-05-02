@@ -82,13 +82,60 @@ module.exports = function(app) {
   );
 
 
-  // GET route for getting all of the animals
-  app.get("/api/animal", function(req, res) {
+  // GET route for getting all of the animals that belongs to a particular farm
+  app.get("/api/animals",isAuthenticated, function(req, res) {
+
+    console.log("UserID" + req.user.id);
+
+    db.animals.findAll({
+      where: {
+        farmId: req.user.id
+       }
+     }).then(function(dbAnimals){
+
+      res.json(dbAnimals);
+
+    });
 
   });
 
   // POST route for saving a new animals. You can create an animal using the data on req.body
-  app.post("/api/animal", function(req, res) {
+  app.post("/api/animals",isAuthenticated, function(req, res) {
+
+    console.log(req.body);
+    console.log(req.user.id);
+    //User Input validation
+    req.checkBody('animalType', 'Animal Type is required').notEmpty();
+
+    //Set variable errors to pass to client in json response
+    var errors = req.validationErrors();
+
+    console.log("errors length", errors);
+    //if no errors
+    if(!errors){
+      console.log("No errors");
+
+      db.animals.create({
+        animalType: req.body.animalType,
+        animalName: req.body.animalName,
+        animalBreed_Desc: req.body.animalBreed_Desc,
+        location: req.body.location,
+        AMFood: req.body.AMFood,
+        PMFood: req.body.PMFood,
+        AMMeds: req.body.AMMeds,
+        PMMeds: req.body.PMMeds,
+        AMNotes: req.body.AMNotes,
+        PMNotes: req.body.PMNotes,
+        farmId: req.user.id
+      }).then(function(dbNewAnimal){
+        console.log(dbNewAnimal);
+      });
+
+      res.json({valid: true, errors: errors});
+    }else{
+      console.log("there are errors");
+      res.json({valid: false, errors: errors});
+    }
 
   });
 
