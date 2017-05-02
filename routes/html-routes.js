@@ -40,11 +40,6 @@ module.exports = function(app) {
 		res.render("login", hbsObject);
 	});
 
-  	// index route loads view.html
-  	//--------------------------------------------
-  	app.get("/", function(req, res) {
-  		res.sendFile(path.join(__dirname + "/../public/farmInfo.html"));
-  	});
 
   	//User Logout
   	//--------------------------------------------
@@ -52,6 +47,12 @@ module.exports = function(app) {
     	req.logOut();
     	req.flash("success_msg", "You have successfully logged out");
     	res.redirect('/login');
+  	});
+
+  	// Route for Barnyard -add custom middleware to redirect user to login page if not already logged in
+  	//--------------------------------------------
+  	app.get("/", function(req, res) {
+  		res.sendFile(path.join(__dirname + "/../public/farmInfo.html"));
   	});
 
 };
