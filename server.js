@@ -20,7 +20,7 @@ var flash = require("connect-flash");
 // Sets up the Express App
 // =============================================================
 var app = express();
-var PORT = process.env.PORT || 8080;
+var PORT = process.env.PORT || 8000;
 
 // Requiring our models for syncing
 var db = require("./models");
@@ -57,9 +57,20 @@ app.use(expressValidator({
 
 //connect flash - Flash is a special area of session used for storing meassages. Messages are written to the flash and cleared after being displayed to the user. 
 app.use(flash());
+app.use(function(req, res, next){
+  //setting global vars
+  res.locals.success_msg = req.flash("success_msg");
+  res.locals.error_msg = req.flash("error_msg");
+  res.locals.error = req.flash("error");
+  res.locals.user = req.user || null;
+  next();
+});
 
 // Static directory
 app.use(express.static("./public"));
+// Setting handlebars
+app.engine("handlebars", exphbs({defaultLayout: "useraccount"}));
+app.set("view engine", "handlebars");
 
 // Routes =============================================================
 require("./routes/html-routes.js")(app);
