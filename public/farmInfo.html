@@ -1,24 +1,76 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Farm Info</title>
+    <title>Barnyard</title>
+    <link href="assets/css/reset.css" rel="stylesheet">
+    <link href="assets/ext/bootstrap/css/bootstrap.min.css" rel="stylesheet"> 
+         <link href="https://fonts.googleapis.com/css?family=Maiden+Orange|Montserrat|Passion+One" rel="stylesheet">
+        <link href="assets/css/style.css" rel="stylesheet">
+        <script src="https://use.fontawesome.com/8491a9bbb1.js"></script>
 </head>
 <body>
-<div>
-<div id = 'farmTitle'>Farm Title</div>
-<div id = 'farmInfo'>
+    <div class="container-fluid">
+        
+        <div class="row back-teal">
+            <header>
+                <div class="back-teal">
+                    <div class="col-sm-5 col-sm-offset-1">
+                        <div id="logo"> WATCH MY FARM </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <button id="logout" class="pull-right"> LOGOUT </button>
+                    </div>
+                </div>
+            </header>
 
-	<h3 id = 'address'>Address</h3>
-    <h3 id = 'email'>Email</h3>
-  	<h3 id = 'homePhone'>Home Phone</h3>
-    <h3 id = 'cellPhone'>Cell Phone</h3>
-    <h3 id = 'emergencyName'>Emergency Contact Name</h3>
-    <h3 id = 'emergencyNumber'>Emergency Contact Number</h3>     
-    <h3 id = 'vetName'>Vet Name</h3>
-    <h3 id = 'vetNumber'>Vet Name</h3>
-    <h3 id = 'farmNotes'>Notes</h3>
+        </div>
+        
+        <div class="row">
+            <div class="col-sm-2 col-sm-offset-1 back-orange">
+                <ul class="text-center">
+                    <li> <h3> <a class="sid-nav-link" href="barnyard.html"><i class="fa fa-paw fa-2x" aria-hidden="true"></i><br> BARNYARD </a> </h3> </li>
+                    <li> <h3> <a class="sid-nav-link" href="farmInfo.html"><i class="fa fa-home fa-2x" aria-hidden="true"></i><br> MY FARM </a> </h3> </li>
+                    <li> <h3> <a class="sid-nav-link" href="schedule.html"><i class="fa fa-calendar fa-2x" aria-hidden="true"></i><br> SCHEDULE </a> </h3> </li>
+                    <li> <h3> <a class="sid-nav-link" href="https://www.paypal.com/" target="_blank"><i class="fa fa-usd fa-2x" aria-hidden="true"></i><br> PAYMENT </a> </h3> </li>
+                </ul>
+            </div>
+            <div class="col-sm-8">
+                <div class="main-area">
+                    <h1 class="back-orange no-top-marg"><div id = 'farmTitle'>FARM TITLE HERE</div></h1>
+                   
+                    <div id="farmInfo">
+                        <h3 class="text-center back-orange small-head" id = 'address'>Address</h3>
+                        <h3 class="text-center back-orange small-head" id = 'email'>Email</h3>
+                        <h3 class="text-center back-orange small-head" id = 'homePhone'>Home Phone</h3>
+                        <h3 class="text-center back-orange small-head" id = 'cellPhone'>Cell Phone</h3>
+                        <h3 class="text-center back-orange small-head" id = 'emergencyName'>Emergency Contact Name</h3>
+                        <h3 class="text-center back-orange small-head" id = 'emergencyNumber'>Emergency Contact Number</h3>     
+                        <h3 class="text-center back-orange small-head" id = 'vetName'>Vet Name</h3>
+                        <h3 class="text-center back-orange small-head" id = 'vetNumber'>Vet Name</h3>
+                        <h3 class="text-center back-orange small-head" id = 'farmNotes'>Notes</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="footer">
+                <p class="light-text"> © Watch My Farm 2017 | GITHUB </p>
+            </div>
+        </div>
+        
 
-</div>
-</div>
+    </div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
