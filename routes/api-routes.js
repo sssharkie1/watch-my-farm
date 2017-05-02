@@ -50,7 +50,14 @@ module.exports = function(app) {
       db.farm.create({
         user_email: req.body.useremail,
         password: req.body.password,
-        farmName: req.body.farmname
+        farmName: req.body.farmname,
+        address: req.body.address,
+        homePhone: req.body.homephone,
+        cellPhone: req.body.cellphone,
+        emergencyName: req.body.emergencyname,
+        emergencyNumber: req.body.emergencyphonem
+        vetName: req.body.vetname,
+        vetNumber: req.body.vetphone
 
       }).then(function() {
 
