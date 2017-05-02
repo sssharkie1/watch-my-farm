@@ -1,0 +1,91 @@
+h1 {
+	color: #EFFFF3;
+	font-family: 'Passion One', sans-serif;
+	text-align: center;
+}
+
+h2 {
+	color: #EFFFF3;
+	font-family: 'Montserrat', sans-serif;
+}
+
+h3 {
+	color: #EFFFF3;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 18px;
+}
+
+p {
+	color: #1E211F;
+	font-family: 'Montserrat', sans-serif;
+}
+
+.back-orange {
+	background-color: #FFB523;
+}
+
+.back-teal {
+	background-color: #4CBF9E;
+}
+
+.main-area {
+	margin-top: 20px;
+	border: 2px solid #FFB523;
+}
+
+.footer {
+	margin-top: 400px;
+	background-color: #4CBF9E;
+	color: #EFFFF3;
+}
+
+.no-top-marg {
+	margin-top: 0px;
+}
+
+.light-text {
+	color: #EFFFF3;
+}
+
+.small-head {
+	margin: 0px 20px 10px 20px;
+	padding: 10px 0px;
+}
+
+i {
+	margin-bottom: 8px;
+}
+
+li {
+	margin-bottom: 45px;
+}
+
+a {
+	color: #EFFFF3;
+	font-size: 18px;
+}
+
+a:hover {
+	color: #4CBF9E;
+}
+
+
+
+#logo {
+	font-family: 'Maiden Orange', serif;
+	font-size: 48px;
+	color: #EFFFF3;
+}
+
+#logout {
+	font-family: 'Maiden Orange', serif;
+	display: inline-block;
+  margin: 12px 10px 0 0;
+  padding: 0px 15px;
+  font-size: 28px;
+  appearance: none;
+  box-shadow: none;
+  border: 2px solid #EFFFF3;
+  background-color: #4CBF9E;
+  color: #EFFFF3;
+}
