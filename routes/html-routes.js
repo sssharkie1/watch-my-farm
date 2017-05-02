@@ -51,8 +51,12 @@ module.exports = function(app) {
 
   	// Route for Barnyard -add custom middleware to redirect user to login page if not already logged in
   	//--------------------------------------------
+  	app.get("/barnyard",isAuthenticated, function(req, res) {
+  		res.sendFile(path.join(__dirname + "/../public/barnyard.html"));
+  	});
+
   	app.get("/", function(req, res) {
-  		res.sendFile(path.join(__dirname + "/../public/farmInfo.html"));
+  		res.redirect('/login');
   	});
 
 };

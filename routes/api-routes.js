@@ -75,7 +75,7 @@ module.exports = function(app) {
   //------------------------------------------------------------
   app.post('/api/login',
     // The login form is submitted to the server via the POST method. Using authenticate() with the local strategy will handle the login request.
-     passport.authenticate('local', { successRedirect: '/',
+     passport.authenticate('local', { successRedirect: '/barnyard',
                                    failureRedirect: '/login',
                                    failureFlash: true })
     

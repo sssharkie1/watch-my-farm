@@ -39,7 +39,7 @@ module.exports = function(sequelize, DataTypes) {
     PMNotes: {
       type: DataTypes.STRING,
       allowNull: true
-    },    
+    }  
     //timestamps: false,
 
   },
