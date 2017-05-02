@@ -6,12 +6,74 @@
 // =============================================================
 
 // Grabbing our models
-
 var db = require("../models");
+var passport = require("../config/passport");
+
+// Requiring our custom middleware for checking if a user is logged in
+var isAuthenticated = require("../config/middleware/isAuthenticated");
 
 // Routes
 // =============================================================
 module.exports = function(app) {
+
+  //POST route for User signup
+  //------------------------------------------------------------
+  app.post('/api/signup', function(req,res){
+
+    //get the form fields from req.body
+    var useremail = req.body.useremail;
+    var password = req.body.password;
+    var farmname = req.body.farmname;
+
+    //User Input validation
+    req.checkBody('useremail', 'User Email is required').notEmpty();
+    req.checkBody('useremail', 'Email is not valid').isEmail();
+    req.checkBody('password', 'Password is required').notEmpty();
+    req.checkBody('farmname', 'Farm Name field is required').notEmpty();
+
+    //Set variable errors to pass to hbs object
+    var errors = req.validationErrors();
+
+    //Render the Signup page if errors exist, also pass the errors
+    if(errors){
+      var hbsObject = {
+      title: "Sign Up - WatchMyFarm",
+      layout: "useraccount",
+      errors: errors
+      };
+
+      res.render("signup", hbsObject);
+
+    }else{
+      console.log(req.body);
+
+      db.farm.create({
+        user_email: req.body.useremail,
+        password: req.body.password,
+        farmName: req.body.farmname
+
+      }).then(function() {
+
+        req.flash("success_msg", "You are registered and can now login");
+        res.redirect("/login");
+
+      }).catch(function(err) {
+        res.json(err);
+      });
+    }
+
+  });
+
+  //POST route for User Login
+  //------------------------------------------------------------
+  app.post('/api/login',
+    // The login form is submitted to the server via the POST method. Using authenticate() with the local strategy will handle the login request.
+     passport.authenticate('local', { successRedirect: '/',
+                                   failureRedirect: '/login',
+                                   failureFlash: true })
+    
+  );
+
 
   // GET route for getting all of the animals
   app.get("/api/animal", function(req, res) {

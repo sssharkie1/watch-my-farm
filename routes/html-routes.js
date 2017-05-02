@@ -6,15 +6,41 @@
 // =============================================================
 var path = require("path");
 
+// Requiring our custom middleware for checking if a user is logged in
+var isAuthenticated = require("../config/middleware/isAuthenticated");
+
+
 // Routes
 // =============================================================
 module.exports = function(app) {
 
   // Each of the below routes just handles the HTML page that the user gets sent to.
 
-  // index route loads view.html
-  app.get("/", function(req, res) {
-    res.sendFile(path.join(__dirname + "/../public/view.html"));
-  });
+  // When user clicks on the Sign up link, render the signup handlebars and override the default layout to use useraccount.hbs
+	app.get("/signup", function(req,res){
+
+		var hbsObject = {
+			title: "Sign Up - Watch My Farm",
+			layout: "useraccount"
+		};
+
+		res.render("signup", hbsObject);
+	});
+
+	// When user clicks on the Login link, render the login handlebars and override the default layout to use useraccount.hbs
+	app.get("/login", function(req,res){
+
+		var hbsObject = {
+			title: "Login - Watch My Farm",
+			layout: "useraccount"
+		};
+
+		res.render("login", hbsObject);
+	});
+
+  	// index route loads view.html
+  	app.get("/", function(req, res) {
+  		res.sendFile(path.join(__dirname + "/../public/farmInfo.html"));
+  	});
 
 };
