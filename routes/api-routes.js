@@ -50,7 +50,14 @@ module.exports = function(app) {
       db.farm.create({
         user_email: req.body.useremail,
         password: req.body.password,
-        farmName: req.body.farmname
+        farmName: req.body.farmname,
+        address: req.body.address,
+        homePhone: req.body.homephone,
+        cellPhone: req.body.cellphone,
+        emergencyName: req.body.emergencyname,
+        emergencyNumber: req.body.emergencyphone,
+        vetName: req.body.vetname,
+        vetNumber: req.body.vetphone
 
       }).then(function() {
 
@@ -68,7 +75,7 @@ module.exports = function(app) {
   //------------------------------------------------------------
   app.post('/api/login',
     // The login form is submitted to the server via the POST method. Using authenticate() with the local strategy will handle the login request.
-     passport.authenticate('local', { successRedirect: '/',
+     passport.authenticate('local', { successRedirect: '/barnyard',
                                    failureRedirect: '/login',
                                    failureFlash: true })
     
