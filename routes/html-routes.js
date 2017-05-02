@@ -17,6 +17,7 @@ module.exports = function(app) {
   // Each of the below routes just handles the HTML page that the user gets sent to.
 
   // When user clicks on the Sign up link, render the signup handlebars and override the default layout to use useraccount.hbs
+  //------------------------------------------------
 	app.get("/signup", function(req,res){
 
 		var hbsObject = {
@@ -28,6 +29,7 @@ module.exports = function(app) {
 	});
 
 	// When user clicks on the Login link, render the login handlebars and override the default layout to use useraccount.hbs
+	//---------------------------------------------
 	app.get("/login", function(req,res){
 
 		var hbsObject = {
@@ -39,8 +41,17 @@ module.exports = function(app) {
 	});
 
   	// index route loads view.html
+  	//--------------------------------------------
   	app.get("/", function(req, res) {
   		res.sendFile(path.join(__dirname + "/../public/farmInfo.html"));
+  	});
+
+  	//User Logout
+  	//--------------------------------------------
+  	app.get('/logout', function(req, res){
+    	req.logOut();
+    	req.flash("success_msg", "You have successfully logged out");
+    	res.redirect('/login');
   	});
 
 };

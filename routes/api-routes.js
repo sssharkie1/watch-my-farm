@@ -55,7 +55,7 @@ module.exports = function(app) {
         homePhone: req.body.homephone,
         cellPhone: req.body.cellphone,
         emergencyName: req.body.emergencyname,
-        emergencyNumber: req.body.emergencyphonem
+        emergencyNumber: req.body.emergencyphone,
         vetName: req.body.vetname,
         vetNumber: req.body.vetphone
 
