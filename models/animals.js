@@ -39,25 +39,26 @@ module.exports = function(sequelize, DataTypes) {
     PMNotes: {
       type: DataTypes.STRING,
       allowNull: true
-    }  
+    },  
     //timestamps: false,
 
   },
     {
         classMethods: {
+          //associate with task
+        associate: function(models) {
+          animals.hasMany(models.task, {
+            onDelete: "cascade"
+          });
+        },
         associate: function(models) {
           animals.belongsTo(models.farm, {
             foreignKey: {
               allowNull: false
             }
           });
-        },
-//associate with task
-        associate: function(models) {
-          animals.hasMany(models.task, {
-            onDelete: "cascade"
-          });
-        }        
+        }
+       
       }
     }
   );
