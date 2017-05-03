@@ -41,9 +41,9 @@ passport.use(new LocalStrategy(
 // In order to help keep authentication state across HTTP requests,
 //Each subsequent request will not contain credentials, but rather the unique cookie that identifies the session. In order to support login sessions, Passport will serialize and deserialize user instances to and from the session.
 passport.serializeUser(function(user, done) {
-  console.log("Inside serialize User-----")
-  console.log(user);
-  console.log("--------------");
+  //console.log("Inside serialize User-----")
+  //console.log(user);
+  //console.log("--------------");
   done(null, user.id);
 });
 
@@ -53,9 +53,9 @@ passport.deserializeUser(function(id, done) {
     			id: id 
     		}
     	}).then(function(dbUser){
-        console.log("Inside deserialize User-----")
-        console.log(dbUser);
-        console.log("--------------");
+        // console.log("Inside deserialize User-----")
+        // console.log(dbUser);
+        // console.log("--------------");
     		done(null, dbUser);
     	});
 });
