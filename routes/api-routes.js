@@ -57,7 +57,8 @@ module.exports = function(app) {
         emergencyName: req.body.emergencyname,
         emergencyNumber: req.body.emergencyphone,
         vetName: req.body.vetname,
-        vetNumber: req.body.vetphone
+        vetNumber: req.body.vetphone,
+        farmId: req.user.id
 
       }).then(function() {
 
