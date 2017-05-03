@@ -177,7 +177,24 @@ module.exports = function(app) {
   });
 
   // GET route for getting all of the farms
-  app.get("/api/farm", function(req, res) {
+  app.get("/api/farms", function(req, res) {
+
+  });
+
+  // GET route for getting farm Information corresponding to the Logged in user
+  app.get("/api/farm",isAuthenticated, function(req, res) {
+
+    console.log("UserID" + req.user.id);
+
+    db.farm.findAll({
+      where: {
+        id: req.user.id
+       }
+     }).then(function(dbFarmInfo){
+
+      res.json(dbFarmInfo);
+
+    });
 
   });
 
