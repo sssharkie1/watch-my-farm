@@ -106,13 +106,36 @@ $( document ).ready(function() {
     	
     });
 
+    // When editFarm modal is clicked prepopulate modal fields with data
+
+    $('#editFarm').on('show.bs.modal', function (event) {
+
+
+    	//If the farmInfo variable has data, populate the modal fields
+    	if(farmInfo){
+
+    		var modal = $(this);
+    		modal.find('#farm-name').val(farmInfo.farmName);
+  			modal.find('#farm-address').val(farmInfo.address);
+	      	modal.find('#email').val(farmInfo.user_email);
+	      	modal.find('#farm-homePhone').val(farmInfo.homePhone);
+		    modal.find('#cell-phone').val(farmInfo.cellPhone);
+		    modal.find('#emer-name').val(farmInfo.emergencyName);
+		    modal.find('#emer-num').val(farmInfo.emergencyNumber);
+		    modal.find('#vet-name').val(farmInfo.vetName);
+		    modal.find('#vet-num').val(farmInfo.vetNumber);
+		    modal.find('#notes').val(farmInfo.Notes);
+
+    	}
+
+    });
+
     //Edit farm Info AJAX PUT 
     //--------------------------------------------------------------
     $('#editFarmInfo').on('click', function(event){
 
     	console.log("edit farm info button clicked");
-    	//Show modal with populated farm Information
-    	
+
 
 
     });
