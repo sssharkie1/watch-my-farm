@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Barnyard</title>
+    <title>Farm Info</title>
+    
+    <!-- Reset CSS -->
     <link href="assets/css/reset.css" rel="stylesheet">
-    <link href="assets/ext/bootstrap/css/bootstrap.min.css" rel="stylesheet"> 
-         <link href="https://fonts.googleapis.com/css?family=Maiden+Orange|Montserrat|Passion+One" rel="stylesheet">
-        <link href="assets/css/style.css" rel="stylesheet">
-        <script src="https://use.fontawesome.com/8491a9bbb1.js"></script>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/ext/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Maiden+Orange|Montserrat|Passion+One" rel="stylesheet">
+    
+    <!-- Custom CSS --> 
+    <link href="assets/css/style.css" rel="stylesheet">
+
 </head>
 <body>
     <div class="container-fluid">
@@ -28,38 +36,142 @@
         <div class="row">
             <div class="col-sm-2 col-sm-offset-1 back-orange">
                 <ul class="text-center">
-                    <li> <h3> <a class="sid-nav-link" href="barnyard.html"><i class="fa fa-paw fa-2x" aria-hidden="true"></i><br> BARNYARD </a> </h3> </li>
-                    <li> <h3> <a class="sid-nav-link" href="farmInfo.html"><i class="fa fa-home fa-2x" aria-hidden="true"></i><br> MY FARM </a> </h3> </li>
-                    <li> <h3> <a class="sid-nav-link" href="schedule.html"><i class="fa fa-calendar fa-2x" aria-hidden="true"></i><br> SCHEDULE </a> </h3> </li>
+                    <li> <h3> <a class="sid-nav-link" href="/barnyard"><i class="fa fa-paw fa-2x" aria-hidden="true"></i><br> BARNYARD </a> </h3> </li>
+                    <li> <h3> <a class="sid-nav-link" href="/farmInfo"><i class="fa fa-home fa-2x" aria-hidden="true"></i><br> MY FARM </a> </h3> </li>
+                    <li> <h3> <a class="sid-nav-link" href="/schedule"><i class="fa fa-calendar fa-2x" aria-hidden="true"></i><br> SCHEDULE </a> </h3> </li>
                     <li> <h3> <a class="sid-nav-link" href="https://www.paypal.com/" target="_blank"><i class="fa fa-usd fa-2x" aria-hidden="true"></i><br> PAYMENT </a> </h3> </li>
                 </ul>
             </div>
             <div class="col-sm-8">
                 <div class="main-area">
-                    <h1 class="back-orange no-top-marg"><div id = 'farmTitle'>FARM TITLE HERE</div></h1>
+                    <h1 class="back-orange no-top-marg"><div id = 'farmTitle'><span>FARM TITLE</span></div></h1>
                    
                     <div id="farmInfo">
                         <h3 class="text-center back-orange small-head" id = 'address'>Address</h3>
+                        <p class="text-center small-head" id = 'address-fld'></p>
                         <h3 class="text-center back-orange small-head" id = 'email'>Email</h3>
+                        <p class="text-center small-head" id = 'email-fld'></p>
                         <h3 class="text-center back-orange small-head" id = 'homePhone'>Home Phone</h3>
+                        <p class="text-center small-head" id = 'homePhone-fld'></p>
                         <h3 class="text-center back-orange small-head" id = 'cellPhone'>Cell Phone</h3>
+                        <p class="text-center small-head" id = 'cellPhone-fld'></p>
                         <h3 class="text-center back-orange small-head" id = 'emergencyName'>Emergency Contact Name</h3>
-                        <h3 class="text-center back-orange small-head" id = 'emergencyNumber'>Emergency Contact Number</h3>     
-                        <h3 class="text-center back-orange small-head" id = 'vetName'>Vet Name</h3>
-                        <h3 class="text-center back-orange small-head" id = 'vetNumber'>Vet Name</h3>
+                        <p class="text-center small-head" id = 'emergencyName-fld'></p>
+                        <h3 class="text-center back-orange small-head" id = 'emergencyNumber'>Emergency Contact Number</h3>
+                        <p class="text-center small-head" id = 'emergencyNumber-fld'></p>    
+                        <h3 class="text-center back-orange small-head" id = 'vetName'>Veterinarian Name</h3>
+                        <p class="text-center small-head" id = 'vetName-fld'></p>
+                        <h3 class="text-center back-orange small-head" id = 'vetNumber'>Veterinarian Number</h3>
+                        <p class="text-center small-head" id = 'vetNumber-fld'></p>
                         <h3 class="text-center back-orange small-head" id = 'farmNotes'>Notes</h3>
+                        <p class="text-center small-head" id = 'farmNotes-fld'></p>
+                        <br />
+                        <div class = "text-center editFarmInfobtn">
+                            <button type="button" class = "btn btn-primary text-center red-button" id = "editFarmbtn" data-toggle="modal" data-target="#editFarm">EDIT</button>
+                        </div><!-- ./text-center -->
                     </div>
                 </div>
             </div>
-        </div>
+        </div><!-- ./row -->
+
+                <!-- Edit farmInfo - Modal -->
+        <div class="modal fade" id="editFarm" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Edit Farm Information</h4>
+                    </div><!-- ./modal-header -->
+                    <div class="modal-body">
+        
+                        <div id="error-div"></div>
+
+                        <form id="editFarm-form">
+
+                            <div class="form-group">
+                                <label for="farm-name">Farm Name</label>
+                                <input type="text" class="form-control" id="farm-name" name = "farm-name" placeholder="Three Girls Farm" > 
+                             </div>
+                             <div class="form-group">
+                                <label for="farm-address">Address</label>
+                                <input type="text" class="form-control" id="farm-address" name = "farm-address" placeholder="1232 Made Up Lane" > 
+                             </div>
+
+                             <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="text" class="form-control" id="email" name = "email" placeholder="testy@tester.net" readOnly> 
+                             </div>
+
+                             <div class="form-group">
+                                <label for="farm-homePhone">Home Phone</label>
+                                <input type="text" class="form-control" id="farm-homePhone" name = "farm-homePhone" placeholder="(333) 555-5555"> 
+                             </div>
+
+                             <div class="form-group">
+                                <label for="cell-phone">Cell Phone</label>
+                                <input type="text" class="form-control" id="cell-phone" name = "cell-phone" placeholder="(333) 555-5555" required> 
+                             </div>
+
+                             <div class="form-group">
+                                <label for="emer-name">Emergency Contact Name</label>
+                                <input type="text" class="form-control" id="emer-name" name = "emer-name" placeholder="John B. Macklemore"> 
+                             </div>
+
+                             <div class="form-group">
+                                <label for="emer-num">Emergency Contact Number</label>
+                                <input type="text" class="form-control" id="emer-num" name = "emer-num" placeholder="(333) 555-5555"> 
+                             </div>
+
+                             <div class="form-group">
+                                <label for="vet-name">Veterinarian Name</label>
+                                <input type="text" class="form-control" id="vet-name" name = "vet-name" placeholder="Dr. William Williams, East West Equine Vet Services"> 
+                             </div>
+
+                             <div class="form-group">
+                                <label for="vet-phone">Veterinarian Phone</label>
+                                <input type="text" class="form-control" id="vet-phone" name = "vet-phone" placeholder="(333) 555-5555"> 
+                             </div>
+
+                             <div class="form-group">
+                                <label for="notes">Notes</label>
+                                <input type="text" class="form-control" id="notes" name = "notes" placeholder=""> 
+                             </div>
+
+                            <button type="submit" class="btn btn-primary" id="editFarmInfo">SAVE</button>
+            
+                        </form>
+
+                    </div><!-- ./modal-body -->
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div><!-- ./modal-footer -->
+
+                </div><!-- ./modal-content -->
+
+            </div><!-- ./modal-dialog -->
+        </div><!-- ./modal fade -->
+
         <div class="row">
             <div class="footer">
                 <p class="light-text"> © Watch My Farm 2017 | GITHUB </p>
             </div>
         </div>
         
+    </div><!-- ./container-fluid -->
 
-    </div>
+
+     <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="assets/ext/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/8491a9bbb1.js"></script>
+
+    <!-- Custom Script-->
+    <script type="text/javascript" src="assets/javascript/app.js"></script>
+
 </body>
 </html>
 

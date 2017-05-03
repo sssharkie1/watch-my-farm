@@ -172,12 +172,29 @@ module.exports = function(app) {
         } 
       }).then(function(dbAnimal){
         res.json(dbAnimal);
-      })
+      });
 
   });
 
   // GET route for getting all of the farms
-  app.get("/api/farm", function(req, res) {
+  app.get("/api/farms", function(req, res) {
+
+  });
+
+  // GET route for getting farm Information corresponding to the Logged in user
+  app.get("/api/farm",isAuthenticated, function(req, res) {
+
+    console.log("UserID" + req.user.id);
+
+    db.farm.findAll({
+      where: {
+        id: req.user.id
+       }
+     }).then(function(dbFarmInfo){
+
+      res.json(dbFarmInfo);
+
+    });
 
   });
 
@@ -192,7 +209,20 @@ module.exports = function(app) {
   });
 
   // PUT route for updating farm. The updated farm will be available in req.body
-  app.put("/api/farm", function(req, res) {
+  app.put("/api/farm",isAuthenticated, function(req, res) {
+
+    console.log("Inside put for farm info");
+    console.log(req.user.id);
+    console.log(req.body);
+
+      db.farm.update(req.body,
+      {
+        where:{
+          id: req.user.id
+        } 
+      }).then(function(dbFarm){
+        res.json(dbFarm);
+      });
 
   });
 

@@ -8,10 +8,14 @@ $( document ).ready(function() {
 	//----------------------------------------------------
 	var animalID;
 	var updating = false;
+	var farmInfo;
 
 	//Get the initial list of animals from the database
     //-----------------------------------------------------
     getAnimals();
+
+     //Get Farm Information 
+  	getFarmInfo();
 
     //Check if Modal was triggered by Add/Edit click
     $('#addAnimal').on('show.bs.modal', function (event) {
@@ -102,6 +106,73 @@ $( document ).ready(function() {
     	
     });
 
+    // When editFarm modal is clicked prepopulate modal fields with data
+
+    $('#editFarm').on('show.bs.modal', function (event) {
+
+
+    	//If the farmInfo variable has data, populate the modal fields
+    	if(farmInfo){
+
+    		var modal = $(this);
+    		modal.find('#farm-name').val(farmInfo.farmName);
+  			modal.find('#farm-address').val(farmInfo.address);
+	      	modal.find('#email').val(farmInfo.user_email);
+	      	modal.find('#farm-homePhone').val(farmInfo.homePhone);
+		    modal.find('#cell-phone').val(farmInfo.cellPhone);
+		    modal.find('#emer-name').val(farmInfo.emergencyName);
+		    modal.find('#emer-num').val(farmInfo.emergencyNumber);
+		    modal.find('#vet-name').val(farmInfo.vetName);
+		    modal.find('#vet-num').val(farmInfo.vetNumber);
+		    modal.find('#notes').val(farmInfo.Notes);
+
+    	}
+
+    });
+
+    //Edit farm Info AJAX PUT 
+    //--------------------------------------------------------------
+    $('#editFarmInfo').on('click', function(event){
+    	event.preventDefault();
+
+    	console.log("edit farm info button clicked");
+
+    	var errors = [];
+    	//clear the errors-div
+    	$('#error-div').empty();
+
+    	if($('#farm-name').val().trim() === ''){
+
+    		errors.push('Farm Name is required');
+
+    	}
+    	console.log(errors);
+
+    	if(errors.length !== 0){
+    		displayErrors(errors);
+    		return;
+    	}
+
+    	//Get the form elements
+    	var updFarmInfo = {
+    		farmName: $('#farm-name').val().trim(), 
+    		address: $('#farm-address').val().trim(),
+    		homePhone: $('#farm-homePhone').val().trim(),
+    		cellPhone: $('#cell-phone').val().trim(),
+    		emergencyName: $('#emer-name').val().trim(),
+    		emergencyNumber: $('#emer-num').val().trim(),
+    		vetName: $('#vet-name').val().trim(),
+    		vetNumber: $('#vet-phone').val().trim(),
+    		Notes: $('#notes').val().trim()
+    	};
+
+    	console.log(updFarmInfo);
+
+    	//Send an ajax request with information to update Farm table
+    	updateFarm(updFarmInfo);
+
+    });
+
 
     // Functions
 	// =============================================================
@@ -181,6 +252,27 @@ $( document ).ready(function() {
 		});
 	}
 
+	// Function for retrieving farm Information to be rendered to the page
+  	function getFarmInfo() {
+	    $.get("/api/farm", function(data) {
+	    	console.log("Farm info from server---");
+	    	console.log(data);
+	    	farmInfo = data[0];
+	    	
+	      $('#farmTitle span').text(farmInfo.farmName);
+	      $('#address-fld').text(farmInfo.address);
+	      $('#email-fld').text(farmInfo.user_email);
+	      $('#homePhone-fld').text(farmInfo.homePhone);
+	      $('#cellPhone-fld').text(farmInfo.cellPhone);
+	      $('#emergencyName-fld').text(farmInfo.emergencyName);
+	      $('#emergencyNumber-fld').text(farmInfo.emergencyNumber);
+	      $('#vetName-fld').text(farmInfo.vetName);
+	      $('#vetNumber-fld').text(farmInfo.vetNumber);
+	      $('#farmNotes-fld').text(farmInfo.Notes);
+
+	    });
+  	}
+
 	function renderAnimals(animalRows){
 		$('tbody').children().remove();
 		$('#animals-table').children('.alert').remove();
@@ -209,6 +301,17 @@ $( document ).ready(function() {
     	})
     	.done(function() {
       		window.location.href = "/barnyard";
+    	});
+	}
+
+	function updateFarm(farm){
+		$.ajax({
+      		method: "PUT",
+      		url: "/api/farm",
+      		data: farm
+    	})
+    	.done(function() {
+      		window.location.href = "/farminfo";
     	});
 	}
 

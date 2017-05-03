@@ -55,6 +55,18 @@ module.exports = function(app) {
   		res.sendFile(path.join(__dirname + "/../public/barnyard.html"));
   	});
 
+    // Route for FarmInfo -add custom middleware to redirect user to login page if not already logged in
+    //--------------------------------------------
+    app.get("/farminfo",isAuthenticated, function(req, res) {
+      res.sendFile(path.join(__dirname + "/../public/farmInfo.html"));
+    });
+
+    // Route for Schedule page -add custom middleware to redirect user to login page if not already logged in
+    //--------------------------------------------
+    app.get("/schedule",isAuthenticated, function(req, res) {
+      res.sendFile(path.join(__dirname + "/../public/schedule.html"));
+    });
+
   	app.get("/", function(req, res) {
   		res.redirect('/login');
   	});
