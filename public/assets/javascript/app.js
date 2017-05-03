@@ -133,10 +133,43 @@ $( document ).ready(function() {
     //Edit farm Info AJAX PUT 
     //--------------------------------------------------------------
     $('#editFarmInfo').on('click', function(event){
+    	event.preventDefault();
 
     	console.log("edit farm info button clicked");
 
+    	var errors = [];
+    	//clear the errors-div
+    	$('#error-div').empty();
 
+    	if($('#farm-name').val().trim() === ''){
+
+    		errors.push('Farm Name is required');
+
+    	}
+    	console.log(errors);
+
+    	if(errors.length !== 0){
+    		displayErrors(errors);
+    		return;
+    	}
+
+    	//Get the form elements
+    	var updFarmInfo = {
+    		farmName: $('#farm-name').val().trim(), 
+    		address: $('#farm-address').val().trim(),
+    		homePhone: $('#farm-homePhone').val().trim(),
+    		cellPhone: $('#cell-phone').val().trim(),
+    		emergencyName: $('#emer-name').val().trim(),
+    		emergencyNumber: $('#emer-num').val().trim(),
+    		vetName: $('#vet-name').val().trim(),
+    		vetNumber: $('#vet-phone').val().trim(),
+    		Notes: $('#notes').val().trim()
+    	};
+
+    	console.log(updFarmInfo);
+
+    	//Send an ajax request with information to update Farm table
+    	updateFarm(updFarmInfo);
 
     });
 
@@ -268,6 +301,17 @@ $( document ).ready(function() {
     	})
     	.done(function() {
       		window.location.href = "/barnyard";
+    	});
+	}
+
+	function updateFarm(farm){
+		$.ajax({
+      		method: "PUT",
+      		url: "/api/farm",
+      		data: farm
+    	})
+    	.done(function() {
+      		window.location.href = "/farminfo";
     	});
 	}
 
