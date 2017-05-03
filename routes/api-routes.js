@@ -99,6 +99,23 @@ module.exports = function(app) {
 
   });
 
+  // GET route for retrieving a single animal's info
+  app.get("/api/animals/:id",isAuthenticated, function(req, res) {
+
+    console.log("UserID" + req.user.id);
+
+    db.animals.findAll({
+      where: {
+        id: req.params.id
+       }
+     }).then(function(dbAnimals){
+
+      res.json(dbAnimals);
+
+    });
+
+  });
+
   // POST route for saving a new animals. You can create an animal using the data on req.body
   app.post("/api/animals",isAuthenticated, function(req, res) {
 
@@ -145,7 +162,17 @@ module.exports = function(app) {
   });
 
   // PUT route for updating animals. The updated animals will be available in req.body
-  app.put("/api/animal", function(req, res) {
+  app.put("/api/animals", function(req, res) {
+
+    db.animals.update(
+      req.body,
+      {
+        where:{
+          id: req.body.id
+        } 
+      }).then(function(dbAnimal){
+        res.json(dbAnimal);
+      })
 
   });
 
