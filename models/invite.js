@@ -2,18 +2,37 @@ module.exports = function(sequelize, DataTypes) {
   var invite = sequelize.define("invite", {
     startDate: {
       type: DataTypes.DATEONLY,
-      allowNull: true
+      get: function() {
+        return moment.utc(this.getDataValue('startDate')).format('MM-DD-YYYY');
+      }       
+      //allowNull: true
     },
     endDate: {
       type: DataTypes.DATEONLY,
-      allowNull: true
+      get: function() {
+        return moment.utc(this.getDataValue('endDate')).format('MM-DD-YYYY');
+      }      
+      //allowNull: true
     },
+    taskDate: {
+      type: DataTypes.DATEONLY,
+      get: function() {
+        return moment.utc(this.getDataValue('taskDate')).format('MM-DD-YYYY');
+      }      
+      //allowNull: true
+    },    
     magicalLink: {
       type: DataTypes.STRING,
       allowNull: true
     },
-        //timestamps: false,    
+    token: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },     
   },
+{
+      timestamps: false,
+},
     {
 
       classMethods: {
