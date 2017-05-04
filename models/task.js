@@ -21,12 +21,22 @@ module.exports = function(sequelize, DataTypes) {
         return moment.utc(this.getDataValue('endDate')).format('MM-DD-YYYY');
       }      
       //allowNull: true
-    },    
+    },
+    taskDate: {
+      type: DataTypes.DATEONLY,
+      get: function() {
+        return moment.utc(this.getDataValue('taskDate')).format('MM-DD-YYYY');
+      }      
+      //allowNull: true
+    },         
     complete: {
       type: DataTypes.BOOLEAN, 
       defaultValue: false
     },
         //timestamps: false,  
+  },
+  {
+      timestamps: false,
   },
     {
 
