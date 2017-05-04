@@ -171,21 +171,21 @@ module.exports = function(app) {
     });
 
   // DELETE route for deleting animals. You can access the animals id in req.params.id
-  app.destroy("/api/animals/:id",isAuthenticated, function(req, res) {
+  // app.destroy("/api/animals/:id",isAuthenticated, function(req, res) {
 
-    console.log("UserID" + req.user.id);
+  //   console.log("UserID" + req.user.id);
 
-    db.animals.findAll({
-      where: {
-        id: req.params.id
-       }
-     }).then(function(dbAnimalsDestroy){
+  //   db.animals.findAll({
+  //     where: {
+  //       id: req.params.id
+  //      }
+  //    }).then(function(dbAnimalsDestroy){
 
-      res.json(dbAnimalsDestroy);
+  //     res.json(dbAnimalsDestroy);
 
-    });
+  //   });
 
-  });
+  // });
 
 // ------------------------------FARM---------------------------------------
   // GET route for getting farm Information corresponding to the Logged in user
@@ -242,21 +242,21 @@ module.exports = function(app) {
 
 //DESTROY route for deleting a farm based on ID
 
-  app.destroy("/api/farm/:id",isAuthenticated, function(req, res) {
+  //app.destroy("/api/farm/:id",isAuthenticated, function(req, res) {
 
-    console.log("UserID" + req.user.id);
+  //   console.log("UserID" + req.user.id);
 
-    db.farm.findAll({
-      where: {
-        id: req.params.id
-       }
-     }).then(function(dbFarmDestroy){
+  //   db.farm.findAll({
+  //     where: {
+  //       id: req.params.id
+  //      }
+  //    }).then(function(dbFarmDestroy){
 
-      res.json(dbFarmDestroy);
+  //     res.json(dbFarmDestroy);
 
-    });
+  //   });
 
-  });
+  // });
   
 // ------------------------------INVITE---------------------------------------
     // GET route for getting all of the invites
@@ -309,21 +309,21 @@ module.exports = function(app) {
   // DELETE route for deleting invite. You can access the invite id in req.params.id
 //DESTROY route for deleting a farm based on ID
 
-  app.destroy("/api/invite/:id",isAuthenticated, function(req, res) {
+  // app.destroy("/api/invite/:id",isAuthenticated, function(req, res) {
 
-    console.log("UserID" + req.user.id);
+  //   console.log("UserID" + req.user.id);
 
-    db.invite.findAll({
-      where: {
-        id: req.params.id
-       }
-     }).then(function(dbInviteDestroy){
+  //   db.invite.findAll({
+  //     where: {
+  //       id: req.params.id
+  //      }
+  //    }).then(function(dbInviteDestroy){
 
-      res.json(dbInviteDestroy);
+  //     res.json(dbInviteDestroy);
 
-    });
+  //   });
 
-  });
+  // });
 
   // PUT route for updating invite. The updated invite will be available in req.body
 
@@ -456,7 +456,7 @@ module.exports = function(app) {
 
   // PUT route for updating PMTask. The updated task will be available in req.body
 
-    app.put("/api/pmTask",isAuthenticated, function(req, res) {
+  app.put("/api/pmTask",isAuthenticated, function(req, res) {
 
     console.log("Inside put for pmTask info");
     console.log(req.user.id);
@@ -471,4 +471,4 @@ module.exports = function(app) {
         res.json(dbtask);
       });
   });
-
+  }
