@@ -99,6 +99,23 @@ module.exports = function(app) {
 
   });
 
+  // GET route for retrieving a single animal's info
+  app.get("/api/animals/:id",isAuthenticated, function(req, res) {
+
+    console.log("UserID" + req.user.id);
+
+    db.animals.findAll({
+      where: {
+        id: req.params.id
+       }
+     }).then(function(dbAnimals){
+
+      res.json(dbAnimals);
+
+    });
+
+  });
+
   // POST route for saving a new animals. You can create an animal using the data on req.body
   app.post("/api/animals",isAuthenticated, function(req, res) {
 
@@ -150,7 +167,17 @@ module.exports = function(app) {
   });
 
   // PUT route for updating animals. The updated animals will be available in req.body
-  app.put("/api/animal", function(req, res) {
+  app.put("/api/animals", function(req, res) {
+
+    db.animals.update(
+      req.body,
+      {
+        where:{
+          id: req.body.id
+        } 
+      }).then(function(dbAnimal){
+        res.json(dbAnimal);
+      });
 
     connection.query("UPDATE animals SET location = ?, AMFood = ?, PMFood = ?, AMMeds = ?, PMMeds = ?, AMNotes = ?, PMNotes = ? WHERE farmId = ?;", [req.body.location, req.body.AMFood, req.body.PMFood, req.body.AMMeds, 
       req.body.PMMeds, req.body.AMNotes, req.body.PMNotes, req.user.id], function(err, data) {
@@ -161,7 +188,24 @@ module.exports = function(app) {
     });
 
   // GET route for getting all of the farms
-  app.get("/api/farm", function(req, res) {
+  app.get("/api/farms", function(req, res) {
+
+  });
+
+  // GET route for getting farm Information corresponding to the Logged in user
+  app.get("/api/farm",isAuthenticated, function(req, res) {
+
+    console.log("UserID" + req.user.id);
+
+    db.farm.findAll({
+      where: {
+        id: req.user.id
+       }
+     }).then(function(dbFarmInfo){
+
+      res.json(dbFarmInfo);
+
+    });
 
     connection.query("UPDATE farms SET user_email = ?, password = ?, farmName = ?, address = ?, homePhone = ?, cellPhone = ?, emergencyName = ?, emergencyNumber = ?, vetName = ?, vetNumber = ?, Notes = ?  WHERE farmId = ?;", 
       [req.body.user_email, req.body.password, req.body.farmName, 
@@ -174,8 +218,24 @@ module.exports = function(app) {
   });
 
 
-  // PUT route for updating farm. 
-  app.put("/api/farm", function(req, res) {
+
+  });
+
+  // PUT route for updating farm. The updated farm will be available in req.body
+  app.put("/api/farm",isAuthenticated, function(req, res) {
+
+    console.log("Inside put for farm info");
+    console.log(req.user.id);
+    console.log(req.body);
+
+      db.farm.update(req.body,
+      {
+        where:{
+          id: req.user.id
+        } 
+      }).then(function(dbFarm){
+        res.json(dbFarm);
+      });
 
     connection.query("UPDATE farms SET user_email = ?, password = ?, farmName = ?, address = ?, homePhone = ?, cellPhone = ?, emergencyName = ?, emergencyNumber = ?, vetName = ?, vetNumber = ?, Notes = ?  WHERE farmId = ?;", 
       [req.body.user_email, req.body.password, req.body.farmName, 

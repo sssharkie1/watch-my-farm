@@ -67,6 +67,22 @@ a {
 
 a:hover {
 	color: #4CBF9E;
+	text-decoration: none;
+}
+
+.red-button {
+	display: inline-block;
+  margin: 0 10px 0 0;
+  padding: 15px 15px;
+  font-size: 24px;
+  font-family: "Passion One", sans-serif;
+  line-height: 1.8;
+  appearance: none;
+  box-shadow: none;
+  border: none;
+  border-radius: 0;
+  background-color: #9E1512;
+  color: #EFFFF3;
 }
 
 
@@ -88,4 +104,8 @@ a:hover {
   border: 2px solid #EFFFF3;
   background-color: #4CBF9E;
   color: #EFFFF3;
+}
+
+#farmTitle{
+	text-transform: uppercase;
 }
