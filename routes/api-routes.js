@@ -81,7 +81,7 @@ module.exports = function(app) {
     
   );
 
-
+// ------------------------------ANIMALS---------------------------------------
   // GET route for getting all of the animals that belongs to a particular farm
   app.get("/api/animals",isAuthenticated, function(req, res) {
 
@@ -156,11 +156,6 @@ module.exports = function(app) {
 
   });
 
-  // DELETE route for deleting animals. You can access the animals id in req.params.id
-  app.delete("/api/animals/:id", function(req, res) {
-
-  });
-
   // PUT route for updating animals. The updated animals will be available in req.body
   app.put("/api/animals", function(req, res) {
 
@@ -173,14 +168,26 @@ module.exports = function(app) {
       }).then(function(dbAnimal){
         res.json(dbAnimal);
       });
+    });
 
-  });
+  // DELETE route for deleting animals. You can access the animals id in req.params.id
+  // app.destroy("/api/animals/:id",isAuthenticated, function(req, res) {
 
-  // GET route for getting all of the farms
-  app.get("/api/farms", function(req, res) {
+  //   console.log("UserID" + req.user.id);
 
-  });
+  //   db.animals.findAll({
+  //     where: {
+  //       id: req.params.id
+  //      }
+  //    }).then(function(dbAnimalsDestroy){
 
+  //     res.json(dbAnimalsDestroy);
+
+  //   });
+
+  // });
+
+// ------------------------------FARM---------------------------------------
   // GET route for getting farm Information corresponding to the Logged in user
   app.get("/api/farm",isAuthenticated, function(req, res) {
 
@@ -195,16 +202,6 @@ module.exports = function(app) {
       res.json(dbFarmInfo);
 
     });
-
-  });
-
-  // POST route for saving a new farms. You can create a farm using the data on req.body
-  app.post("/api/farm", function(req, res) {
-
-  });
-
-  // DELETE route for deleting farms. You can access the farm id in req.params.id
-  app.delete("/api/farm/:id", function(req, res) {
 
   });
 
@@ -226,43 +223,252 @@ module.exports = function(app) {
 
   });
 
+    // GET route for retrieving a single farm's info
+  app.get("/api/farm/:id",isAuthenticated, function(req, res) {
+
+    console.log("UserID" + req.user.id);
+
+    db.farm.findAll({
+      where: {
+        id: req.params.id
+       }
+     }).then(function(dbFarm){
+
+      res.json(dbFarm);
+
+    });
+
+  });
+
+//DESTROY route for deleting a farm based on ID
+
+  //app.destroy("/api/farm/:id",isAuthenticated, function(req, res) {
+
+  //   console.log("UserID" + req.user.id);
+
+  //   db.farm.findAll({
+  //     where: {
+  //       id: req.params.id
+  //      }
+  //    }).then(function(dbFarmDestroy){
+
+  //     res.json(dbFarmDestroy);
+
+  //   });
+
+  // });
+  
+// ------------------------------INVITE---------------------------------------
     // GET route for getting all of the invites
-  app.get("/api/invite", function(req, res) {
+  app.get("/api/invite",isAuthenticated, function(req, res) {
+
+    console.log("UserID" + req.user.id);
+
+    db.invite.findAll({
+      where: {
+        id: req.user.id
+       }
+     }).then(function(dbInviteInfo){
+
+      res.json(dbInviteInfo);
+
+    });
 
   });
 
   // POST route for saving a new invites. You can create an invite using the data on req.body
-  app.post("/api/invite", function(req, res) {
+  app.post("/api/invite", isAuthenticated, function(req, res) {
+
+    console.log(req.body);
+    console.log(req.user.id);
+    
+    //Set variable errors to pass to client in json response
+    var errors = req.validationErrors();
+
+    console.log("errors length", errors);
+    //if no errors
+    if(!errors){
+      console.log("No errors");
+
+      db.invite.create({
+        startDate: req.body.startDate,
+        endDate: req.body.endDate,
+        farmId: req.user.id
+      }).then(function(dbNewPost){
+        console.log(dbNewPost);
+      });
+
+      res.json({valid: true, errors: errors});
+    }else{
+      console.log("there are errors");
+      res.json({valid: false, errors: errors});
+    }
 
   });
 
   // DELETE route for deleting invite. You can access the invite id in req.params.id
-  app.delete("/api/invite/:id", function(req, res) {
+//DESTROY route for deleting a farm based on ID
 
-  });
+  // app.destroy("/api/invite/:id",isAuthenticated, function(req, res) {
+
+  //   console.log("UserID" + req.user.id);
+
+  //   db.invite.findAll({
+  //     where: {
+  //       id: req.params.id
+  //      }
+  //    }).then(function(dbInviteDestroy){
+
+  //     res.json(dbInviteDestroy);
+
+  //   });
+
+  // });
 
   // PUT route for updating invite. The updated invite will be available in req.body
-  app.put("/api/invite", function(req, res) {
+
+    app.put("/api/invite",isAuthenticated, function(req, res) {
+
+    console.log("Inside put for invite info");
+    console.log(req.user.id);
+    console.log(req.body);
+
+      db.invite.update(req.body,
+      {
+        where:{
+          id: req.user.id
+        } 
+      }).then(function(dbInvite){
+        res.json(dbInvite);
+      });
+  });
+
+// ------------------------------AMTASK---------------------------------------
+    // GET route for getting all of the AM tasks
+  app.get("/api/amTask",isAuthenticated, function(req, res) {
+
+    console.log("UserID" + req.user.id);
+
+    db.task.findAll({
+      where: {
+        id: req.user.id
+       }
+     }).then(function(dbAMTask){
+
+      res.json(dbAMTask);
+
+    });
 
   });
 
-    // GET route for getting all of the tasks
-  app.get("/api/task", function(req, res) {
+  // POST route for saving new AM tasks. You can create a task using the data on req.body
+  // app.post("/api/amTask", isAuthenticated, function(req, res) {
+
+  //   console.log(req.body);
+  //   console.log(req.user.id);
+    
+  //   //Set variable errors to pass to client in json response
+  //   var errors = req.validationErrors();
+
+  //   console.log("errors length", errors);
+  //   //if no errors
+  //   if(!errors){
+  //     console.log("No errors");
+
+  //     db.task.create({
+  //       amTasks: req.body.startDate,
+  //       farmId: req.user.id
+  //     }).then(function(dbNewAMTask){
+  //       console.log(dbNewAMTask);
+  //     });
+
+  //     res.json({valid: true, errors: errors});
+  //   }else{
+  //     console.log("there are errors");
+  //     res.json({valid: false, errors: errors});
+  //   }
+
+  // });
+
+  // PUT route for updating AMTask. The updated task will be available in req.body
+
+    app.put("/api/amTask",isAuthenticated, function(req, res) {
+
+    console.log("Inside put for AMTask info");
+    console.log(req.user.id);
+    console.log(req.body);
+
+      db.task.update(req.body,
+      {
+        where:{
+          id: req.user.id
+        } 
+      }).then(function(dbtask){
+        res.json(dbtask);
+      });
+  });
+// ------------------------------PMTASK---------------------------------------
+    // GET route for getting all of the AM tasks
+  app.get("/api/pmTask",isAuthenticated, function(req, res) {
+
+    console.log("UserID" + req.user.id);
+
+    db.task.findAll({
+      where: {
+        id: req.user.id
+       }
+     }).then(function(dbPMTask){
+
+      res.json(dbPMTask);
+
+    });
 
   });
 
-  // POST route for saving a new tasks. You can create a tasks using the data on req.body
-  app.post("/api/task", function(req, res) {
+  // POST route for saving new PM tasks. You can create a task using the data on req.body
+  // app.post("/api/pmTask", isAuthenticated, function(req, res) {
 
+  //   console.log(req.body);
+  //   console.log(req.user.id);
+    
+  //   //Set variable errors to pass to client in json response
+  //   var errors = req.validationErrors();
+
+  //   console.log("errors length", errors);
+  //   //if no errors
+  //   if(!errors){
+  //     console.log("No errors");
+
+  //     db.task.create({
+  //       pmTasks: req.body.startDate,
+  //       farmId: req.user.id
+  //     }).then(function(dbNewPMTask){
+  //       console.log(dbNewPMTask);
+  //     });
+
+  //     res.json({valid: true, errors: errors});
+  //   }else{
+  //     console.log("there are errors");
+  //     res.json({valid: false, errors: errors});
+  //   }
+
+  // });
+
+  // PUT route for updating PMTask. The updated task will be available in req.body
+
+  app.put("/api/pmTask",isAuthenticated, function(req, res) {
+
+    console.log("Inside put for pmTask info");
+    console.log(req.user.id);
+    console.log(req.body);
+
+      db.task.update(req.body,
+      {
+        where:{
+          id: req.user.id
+        } 
+      }).then(function(dbtask){
+        res.json(dbtask);
+      });
   });
-
-  // DELETE route for deleting tasks. You can access the tasks id in req.params.id
-  app.delete("/api/task/:id", function(req, res) {
-
-  });
-
-  // PUT route for updating task. The updated task will be available in req.body
-  app.put("/api/task", function(req, res) {
-
-  });
-};
+  }
