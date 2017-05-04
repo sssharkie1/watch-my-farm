@@ -2,11 +2,22 @@
 <html>
 <head>
 	<title>Schedule</title>
+	<!-- Reset CSS -->
 	<link href="assets/css/reset.css" rel="stylesheet">
-	<link href="assets/ext/bootstrap/css/bootstrap.min.css" rel="stylesheet"> 
-		 <link href="https://fonts.googleapis.com/css?family=Maiden+Orange|Montserrat|Passion+One" rel="stylesheet">
-		<link href="assets/css/style.css" rel="stylesheet">
-		<script src="https://use.fontawesome.com/8491a9bbb1.js"></script>
+
+	<!-- Bootstrap core CSS -->
+    <link href="assets/ext/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- jQuery UI Datepicker -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.9.2/themes/ui-lightness/jquery-ui.css">
+	
+	<!-- Custom fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Maiden+Orange|Montserrat|Passion+One" rel="stylesheet">
+	
+	<!-- Custom CSS -->	
+	<link href="assets/css/style.css" rel="stylesheet">
+
+
 </head>
 <body>
 	<div class="container-fluid">
@@ -18,7 +29,7 @@
 						<div id="logo"> WATCH MY FARM </div>
 					</div>
 					<div class="col-sm-5">
-						<button id="logout" class="pull-right"> LOGOUT </button>
+						<a href="/logout" id="logout" class="pull-right"> LOGOUT </a>
 					</div>
 				</div>
 			</header>
@@ -28,9 +39,9 @@
 		<div class="row">
 			<div class="col-sm-2 col-sm-offset-1 back-orange">
 				<ul class="text-center">
-					<li> <h3> <a class="sid-nav-link" href="barnyard.html"><i class="fa fa-paw fa-2x" aria-hidden="true"></i><br> BARNYARD </a> </h3> </li>
-					<li> <h3> <a class="sid-nav-link" href="farmInfo.html"><i class="fa fa-home fa-2x" aria-hidden="true"></i><br> MY FARM </a> </h3> </li>
-					<li> <h3> <a class="sid-nav-link" href="schedule.html"><i class="fa fa-calendar fa-2x" aria-hidden="true"></i><br> SCHEDULE </a> </h3> </li>
+					<li> <h3> <a class="sid-nav-link" href="/barnyard"><i class="fa fa-paw fa-2x" aria-hidden="true"></i><br> BARNYARD </a> </h3> </li>
+					<li> <h3> <a class="sid-nav-link" href="/farmInfo"><i class="fa fa-home fa-2x" aria-hidden="true"></i><br> MY FARM </a> </h3> </li>
+					<li> <h3> <a class="sid-nav-link" href="/schedule"><i class="fa fa-calendar fa-2x" aria-hidden="true"></i><br> SCHEDULE </a> </h3> </li>
 					<li> <h3> <a class="sid-nav-link" href="https://www.paypal.com/" target="_blank"><i class="fa fa-usd fa-2x" aria-hidden="true"></i><br> PAYMENT </a> </h3> </li>
 				</ul>
 			</div>
@@ -38,6 +49,29 @@
 				<div class="main-area">
 					<h1 class="back-orange no-top-marg"> SCHEDULE </h1>
 					<div id="scheduleTripBody">
+						<form class=".scheduleTripForm">
+							<div class = "row">
+								<div class = "col-md-5">
+									<div class="form-group">
+									                   			<label for="startDate">START DATE</label>
+									                    		<input type="text" class="form-control" id="startDate" name = "startDate" placeholder="MM/DD/YYYY"> 
+									                 		</div>
+								</div>
+								<div class = "col-md-5">
+								<div class="form-group">
+									                   			<label for="endDate">END DATE</label>
+									                    		<input type="text" class="form-control" id="endDate" name = "endDate" placeholder="MM/DD/YYYY"> 
+									                 		</div>
+								</div>
+								<div class = "col-md-2">
+									<button type="submit" class="btn btn-primary red-button" id="scheduleTrip">SCHEDULE</button>
+								</div>
+							</div>
+						</form>
+
+					</div>
+					<h1 class="back-orange no-top-marg"> MY TRIPS </h1>
+					<div id="myTripsBody">
 						<p> Dummy Text </p>
 						<p> Dummy Text </p>
 						<p> Dummy Text </p>
@@ -55,6 +89,19 @@
 		
 
 	</div>
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="assets/ext/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/8491a9bbb1.js"></script>
+    <script src="../node_modules/moment/moment.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!-- Custom Script-->
+    <script type="text/javascript" src="assets/javascript/schedule.js"></script>
+
 </body>
 </html>
 
