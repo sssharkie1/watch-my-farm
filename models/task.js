@@ -35,9 +35,7 @@ module.exports = function(sequelize, DataTypes) {
     },
         //timestamps: false,  
   },
-  {
-      timestamps: false,
-  },
+  
     {
 
       classMethods: {
@@ -57,7 +55,10 @@ module.exports = function(sequelize, DataTypes) {
           });
         }
       }
-    }
+    },
+     {
+        timestamps: false,
+  }
   );
 
   return task;

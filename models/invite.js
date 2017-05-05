@@ -30,9 +30,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },     
   },
-  {
-        timestamps: false,
-  },
+ 
     {
 
       classMethods: {
@@ -45,7 +43,10 @@ module.exports = function(sequelize, DataTypes) {
           });
         }
       }
-    }
+    },
+     {
+        timestamps: false,
+  }
   );
 
   return invite;
