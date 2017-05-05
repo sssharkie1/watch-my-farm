@@ -5,14 +5,7 @@ var bcrypt = require("bcrypt-nodejs");
 module.exports = function(sequelize, DataTypes) {
     var farm = sequelize.define("farm", {
     // The email cannot be null, and must be a proper email before creation
-    first_name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    last_name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },    
+    
     user_email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -24,6 +17,14 @@ module.exports = function(sequelize, DataTypes) {
     password: {
       type: DataTypes.STRING,
       allowNull:false
+    },
+    first_name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    last_name: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     farmName: {
       type: DataTypes.STRING,
@@ -66,9 +67,9 @@ module.exports = function(sequelize, DataTypes) {
         //timestamps: false,    
 
   },
-  {
-        timestamps: false,
-  },  
+  // {
+  //       timestamps: false,
+  // },  
      {
       classMethods: {
         associate: function(models) {
