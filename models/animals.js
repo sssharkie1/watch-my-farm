@@ -41,9 +41,9 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },  
   },
-  {
-      timestamps: false,
-  },
+  // {
+  // timestamps: false,
+  // },
     {
         classMethods: {
           //associate with task
