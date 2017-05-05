@@ -67,9 +67,7 @@ module.exports = function(sequelize, DataTypes) {
         //timestamps: false,    
 
   },
-  // {
-  //       timestamps: false,
-  // },  
+
      {
       classMethods: {
         associate: function(models) {
@@ -107,7 +105,10 @@ module.exports = function(sequelize, DataTypes) {
           cb(null, options);
         }
       }
-    }
+    },
+    {
+        timestamps: false,
+  }
   );
 
 

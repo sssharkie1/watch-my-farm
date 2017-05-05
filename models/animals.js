@@ -41,9 +41,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },  
   },
-  // {
-  // timestamps: false,
-  // },
+
     {
         classMethods: {
           //associate with task
@@ -61,7 +59,10 @@ module.exports = function(sequelize, DataTypes) {
         }
        
       }
-    }
+    },
+    {
+      timestamps: false,
+  }
   );
 
   return animals;
