@@ -48,6 +48,8 @@ module.exports = function(app) {
       console.log(req.body);
 
       db.farm.create({
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
         user_email: req.body.useremail,
         password: req.body.password,
         farmName: req.body.farmname,

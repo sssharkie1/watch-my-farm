@@ -85,7 +85,16 @@ a:hover {
   color: #EFFFF3;
 }
 
+#login-area {
+	margin-top: 30px;
+	border-right: 2px solid #FFB523;
+	padding: 50px;
+}
 
+#first-time {
+	margin-top: 30px;
+	padding: 50px;
+}
 
 #logo {
 	font-family: 'Maiden Orange', serif;
