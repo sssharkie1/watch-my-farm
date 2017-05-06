@@ -47,6 +47,8 @@ $( document ).ready(function() {
 
     $('#scheduleTrip').on('click', function(event){
 
+      var errors = [];
+
     	event.preventDefault();
 
     	var inStartDate = $('#startDate').val().trim();
@@ -58,14 +60,20 @@ $( document ).ready(function() {
 
     	// Validate input date fields and checkif it's in given format
     	if(!(moment(inStartDate, 'MM/DD/YYYY', true).isValid()) && !(moment(inEndDate, 'MM/DD/YYYY', true).isValid())){
-    		console.log("Both start date and end date are invalid.");
+    		console.log("Both Start date and End date are invalid.");
+        errors.push("Both Start date and End date are invalid.");
     	}
     	else if((moment(inStartDate, 'MM/DD/YYYY', true).isValid()) && !(moment(inEndDate, 'MM/DD/YYYY', true).isValid())){
     		console.log("Please enter end date in the correct format");
+        errors.push("Please enter End date in the correct format");
     	}
     	else if(!(moment(inStartDate, 'MM/DD/YYYY', true).isValid()) && !(moment(inEndDate, 'MM/DD/YYYY', true).isValid())){
     		console.log("Please enter start date in the correct format");
+        errors.push('Please enter start date in the correct format');
     	}
+      else if(moment(inEndDate).isBefore(inStartDate)){
+        errors.push('Start date should be before the End date');
+      }
     	else{
     		//If both dates are valid, check if EndDate is greater than start date
     		if(moment(inEndDate).isSameOrAfter(inStartDate)){
@@ -75,19 +83,48 @@ $( document ).ready(function() {
 
     	}
 
+      if(errors.length !== 0){
+        displayErrors(errors);
+        return;
+      }
+
     	console.log("isValid: " + isValid);
 
     	if(isValid = true){
 
-    		//Make an AJAX request to write to DB
+    		//Make an AJAX POST request to write to DB
     		var newSchedule = {
     			startDate: inStartDate,
     			endDate: inEndDate
     		}
 
+        $.post("/api/invite", newSchedule, function(data) {
+
+          console.log(data);
+          if(data.valid){
+            window.location.href = "/schedule";
+          }
+          else{
+            displayErrors(data.errors);
+          }
+        });
+
     	}
 
 
     });
+
+    function displayErrors(errors){
+      console.log(errors);
+
+      //Loop through errors and display them to user using bootstrap alerts
+      var html = "";
+      for(var i=0; i<errors.length; i++){
+        html += "<div class = 'alert alert-danger'>" + errors[i].msg + "</div>"
+      }
+      console.log(html);
+      $('#error-div').append(html);
+
+    }
 
 });

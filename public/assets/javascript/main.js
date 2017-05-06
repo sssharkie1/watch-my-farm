@@ -113,8 +113,8 @@ $( document ).ready(function() {
     		var modal = $(this);
     		modal.find('#farm-name').val(farmInfo.farmName);
   			modal.find('#farm-address').val(farmInfo.address);
-	      	modal.find('#email').val(farmInfo.user_email);
-	      	modal.find('#farm-homePhone').val(farmInfo.homePhone);
+	      modal.find('#email').val(farmInfo.user_email);
+	      modal.find('#farm-homePhone').val(farmInfo.homePhone);
 		    modal.find('#cell-phone').val(farmInfo.cellPhone);
 		    modal.find('#emer-name').val(farmInfo.emergencyName);
 		    modal.find('#emer-num').val(farmInfo.emergencyNumber);
