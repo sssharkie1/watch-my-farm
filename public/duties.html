@@ -50,18 +50,50 @@
 				<div class="main-area">
 					<h1 id = 'dutiesTitle' class="back-orange no-top-marg"> [DATE HERE] DUTIES </h1>
 					<div id="daily-weather"> maybe put weather here? </div><br><br>
-					<div id = 'AM-duties-list'>AM duties list</div>
-					<div id = 'PM-duties-list'>PM duties list</div>
+					<div class="back-orange no-top-marg" id = 'AM-duties-list'>AM duties list
+
+						<table class="table table-hover" id="animals-table">
+						    <thead>
+						      <tr>
+						        <th class="text-center back-orange small-head">AM Food</th>
+						        <th class="text-center back-orange small-head">AM Meds</th>
+						        <th class="text-center back-orange small-head">AM Notes</th>
+						        <th class="text-center back-orange small-head"> Complete?</th>
+						        <td id = amFood></td>
+						        <td id = amMeds></td>
+						        <td id = amNotes></td>
+
+						      </tr>
+						    </thead>
+						    <tbody>		 
+						    </tbody>
+			 			 </table>
+					</div>
+					<div class="back-orange no-top-marg" id = 'PM-duties-list'>PM duties list
+						<table class="table table-hover" id="animals-table">
+						    <thead>
+						      <tr>
+						        <th class="text-center back-orange small-head">PM Food</th>
+						        <th class="text-center back-orange small-head">PM Meds</th>
+						        <th class="text-center back-orange small-head">PM Notes</th>
+						        <th class="text-center back-orange small-head"> Complete?</th>
+						        <td id = pmFood></td>
+						        <td id = pmMeds></td>
+						        <td id = pmNotes></td>						        
+						      </tr>
+						    </thead>
+						    <tbody>		 
+						    </tbody>
+			 			 </table>
+					</div>
+					<div class="col-sm-8">
+						<div class="main-area">
+							<h1 class="back-orange no-top-marg"> FARM INFO </h1>
+							<div id = 'emergency-info'>add farm info here</div>
+						</div>
+					</div>					
 				</div>
 			</div>
-
-			<div class="col-sm-8">
-				<div class="main-area">
-					<h1 class="back-orange no-top-marg"> FARM INFO </h1>
-					<div id = 'emergency-info'>add farm info here</div>
-				</div>
-			</div>
-
 	
 
 	
@@ -77,8 +109,10 @@
     <script src="assets/ext/moment.js"></script>
     <script src="/bundle.js"></script>
 
-    <!-- Custom Script-->
-    <script type="text/javascript" src="assets/javascript/app.js"></script>
-
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="assets/ext/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/8491a9bbb1.js"></script>
+    <script src="/bundle.js"></script>
 </body>
 </html>
