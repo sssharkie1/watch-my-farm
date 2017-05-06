@@ -53,7 +53,7 @@
 					<h1 class="back-orange no-top-marg"> BARNYARD </h1>
 					<div id="animals-table">
 			     		 <!--Table-->
-			     		 <table class="table table-hover" id="animals-table">
+			     		 <table class="table table-responsive table-striped input-label" id="animals-table">
 						    <thead>
 						      <tr>
 						        <th>Animal</th>
@@ -82,26 +82,27 @@
 							<div class="modal-content">
 			          			<div class="modal-header">
 			          				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			            			<h4 class="modal-title">Add Animal</h4>
+			            			<h1 class="modal-title back-orange">ADD ANIMAL</h4>
 			          			</div><!-- ./modal-header -->
 			          			<div class="modal-body">
+
 					
 									<div id="error-div"></div>
 
-									<form id="addAnimal-form">
+									<form class="input-label" id="addAnimal-form">
 										 <div class="form-group">
 			                   			 	<label for="animal-type">Animal Type</label>
 			                    			<input type="text" class="form-control" id="animal-type" name = "animal-type" placeholder="eg: Horse" required> 
 			                 			 </div>
 
 			                 			 <div class="form-group">
-			                   			 	<label for="animal-name">Name</label>
+			                   			 	<label for="animal-name">Name</label><div class="help-note"> For herd or flock animals you may enter an ID number here for each, or leave blank to indicate the whole herd or flock (e.g. leave blank to indicate instructions for a whole herd of horses) </div>
 			                    			<input type="text" class="form-control" id="animal-name" name = "animal-name" placeholder="Fiona"> 
 			                 			 </div>
 
 			                 			 <div class="form-group">
-			                   			 	<label for="animal-breed">Animal Breed</label>
-			                    			<input type="text" class="form-control" id="animal-breed" name = "animal-breed" placeholder="eg: American Quarter Horse"> 
+			                   			 	<label for="animal-breed">Animal Breed/Color</label>
+			                    			<input type="text" class="form-control" id="animal-breed" name = "animal-breed" placeholder="eg: American Quarter Horse or black"> 
 			                 			 </div>
 
 			                 			 <div class="form-group">
@@ -130,12 +131,12 @@
 			                 			 </div>
 
 			                 			 <div class="form-group">
-			                   			 	<label for="am-notes">AM Notes</label>
+			                   			 	<label for="am-notes">AM Notes</label><div class="help-note"> Any helpful notes or additional AM chores pertaining to this animal</div>
 			                    			<input type="text" class="form-control" id="am-notes" name = "am-notes" placeholder="AM Notes"> 
 			                 			 </div>
 
 			                 			 <div class="form-group">
-			                   			 	<label for="pm-notes">PM Notes</label>
+			                   			 	<label for="pm-notes">PM Notes</label><div class="help-note"> Any helpful notes or additional PM chores pertaining to this animal</div>
 			                    			<input type="text" class="form-control" id="pm-notes" name = "pm-notes" placeholder="PM Food"> 
 			                 			 </div>
 

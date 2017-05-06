@@ -28,6 +28,12 @@ p {
 	font-size: 16px;
 }
 
+.input-label {
+	color: #1E211F;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 16px;
+}
+
 .back-orange {
 	background-color: #FFB523;
 }
@@ -117,9 +123,16 @@ a:hover, a:focus {
 
 }
 
-.red-button:hover {
+.red-button:hover, .red-button:focus, .red-button:active {
 	box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 5px 5px 0 rgba(0,0,0,0.19);
 	background-color: #4CBF9E;
+	outline: none;
+}
+
+.help-note {
+	font-size: 14px;
+	font-style: italic;
+	color: #4CBF9E; 
 }
 
 #login-area {
@@ -156,6 +169,6 @@ a:hover, a:focus {
 	text-transform: uppercase;
 }
 
-#scheduleTripBody, #animals-table {
+#scheduleTripBody, #animals-table, #farmInfo {
 	padding: 30px;
 }
