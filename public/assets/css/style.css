@@ -2,6 +2,7 @@ h1 {
 	color: #EFFFF3;
 	font-family: 'Passion One', sans-serif;
 	text-align: center;
+	letter-spacing: 2px;
 }
 
 h2 {
@@ -18,6 +19,13 @@ h3 {
 p {
 	color: #1E211F;
 	font-family: 'Montserrat', sans-serif;
+}
+
+.dark-text-link {
+	color: #1E211F;
+	font-family: 'Montserrat', sans-serif;
+	text-decoration: underline;
+	font-size: 16px;
 }
 
 .back-orange {
@@ -65,15 +73,36 @@ a {
 	font-size: 18px;
 }
 
-a:hover {
+
+
+
+
+.sid-nav-link:visited {
+	text-decoration: none;
+	color: #EFFFF3;
+}
+
+a:hover, a:focus {
 	color: #4CBF9E;
 	text-decoration: none;
+}
+
+.sid-nav-link:active {
+	text-decoration: none;
+	text-decoration-style: none;
+	color: #EFFFF3;
+}
+
+#logout:hover {
+	color: #9E1512;
+	border: 2px solid #9E1512;
+
 }
 
 .red-button {
 	display: inline-block;
   margin: 0 10px 0 0;
-  padding: 15px 15px;
+  padding: 5px 15px;
   font-size: 24px;
   font-family: "Passion One", sans-serif;
   line-height: 1.8;
@@ -83,6 +112,14 @@ a:hover {
   border-radius: 0;
   background-color: #9E1512;
   color: #EFFFF3;
+  width: 50%;
+  letter-spacing: 2px;
+
+}
+
+.red-button:hover {
+	box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 5px 5px 0 rgba(0,0,0,0.19);
+	background-color: #4CBF9E;
 }
 
 #login-area {
@@ -117,4 +154,8 @@ a:hover {
 
 #farmTitle{
 	text-transform: uppercase;
+}
+
+#scheduleTripBody, #animals-table {
+	padding: 30px;
 }
