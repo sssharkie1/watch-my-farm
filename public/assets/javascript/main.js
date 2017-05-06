@@ -113,8 +113,9 @@ $( document ).ready(function() {
     		var modal = $(this);
     		modal.find('#farm-name').val(farmInfo.farmName);
   			modal.find('#farm-address').val(farmInfo.address);
-	      	modal.find('#email').val(farmInfo.user_email);
-	      	modal.find('#farm-homePhone').val(farmInfo.homePhone);
+        modal.find('#zipcode').val(farmInfo.zipcode);        
+	      modal.find('#email').val(farmInfo.user_email);
+	      modal.find('#farm-homePhone').val(farmInfo.homePhone);
 		    modal.find('#cell-phone').val(farmInfo.cellPhone);
 		    modal.find('#emer-name').val(farmInfo.emergencyName);
 		    modal.find('#emer-num').val(farmInfo.emergencyNumber);
@@ -153,6 +154,7 @@ $( document ).ready(function() {
     	var updFarmInfo = {
     		farmName: $('#farm-name').val().trim(), 
     		address: $('#farm-address').val().trim(),
+        zipcode: $('#zipcode').val().trim(),        
     		homePhone: $('#farm-homePhone').val().trim(),
     		cellPhone: $('#cell-phone').val().trim(),
     		emergencyName: $('#emer-name').val().trim(),
@@ -257,6 +259,7 @@ $( document ).ready(function() {
 	    	
 	      $('#farmTitle span').text(farmInfo.farmName);
 	      $('#address-fld').text(farmInfo.address);
+        $('#zipcode-fld').text(farmInfo.zipcode);        
 	      $('#email-fld').text(farmInfo.user_email);
 	      $('#homePhone-fld').text(farmInfo.homePhone);
 	      $('#cellPhone-fld').text(farmInfo.cellPhone);
@@ -310,5 +313,25 @@ $( document ).ready(function() {
       		window.location.href = "/farminfo";
     	});
 	}
+
+      function getTaskInfo() {
+      $.get("/api/task", function(data) {
+        console.log("task info from server---");
+        console.log(data);
+        animalsInfo = data[0];
+        
+        $('#amFood').text(animalsInfo.AMFood);
+
+        $('#amMeds').text(animalsInfo.AMMeds);
+
+        $('#amNotes').text(animalsInfo.AMNotes);
+
+        $('#pmFood').text(animalsInfo.PMFood);
+
+        $('#pmMeds').text(animalsInfo.PMMeds);
+
+        $('#pmNotes').text(animalsInfo.PMNotes);        
+      });
+    }
 
 });

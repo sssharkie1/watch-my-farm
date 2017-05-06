@@ -54,6 +54,7 @@ module.exports = function(app) {
         password: req.body.password,
         farmName: req.body.farmname,
         address: req.body.address,
+        zipcode: req.body.zipcode,
         homePhone: req.body.homephone,
         cellPhone: req.body.cellphone,
         emergencyName: req.body.emergencyname,
@@ -351,7 +352,7 @@ module.exports = function(app) {
 
     console.log("UserID" + req.user.id);
 
-    db.task.findAll({
+    db.animals.findAll({
       where: {
         id: req.user.id
        }

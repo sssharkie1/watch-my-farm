@@ -34,7 +34,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true
     },
-
+    zipcode: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     homePhone: {
       type: DataTypes.STRING,
       allowNull: true
@@ -64,8 +67,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true
     },
-        //timestamps: false,    
-
   },
 
      {
