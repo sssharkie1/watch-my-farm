@@ -1,5 +1,7 @@
 $( document ).ready(function() {
 
+  var errors = [];
+
 	// Logic for from and to dates from jquery ui datepicker widget
     $( function() {
     var dateFormat = "mm/dd/yy",
@@ -47,7 +49,7 @@ $( document ).ready(function() {
 
     $('#scheduleTrip').on('click', function(event){
 
-      var errors = [];
+      errors = [];
 
     	event.preventDefault();
 

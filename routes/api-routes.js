@@ -9,6 +9,12 @@
 var db = require("../models");
 var passport = require("../config/passport");
 
+// Moment js - for date manipulations
+var moment = require('moment');
+
+//Shortid - to generate token for magic link
+var shortid = require('shortid');
+
 // Requiring our custom middleware for checking if a user is logged in
 var isAuthenticated = require("../config/middleware/isAuthenticated");
 
@@ -283,22 +289,49 @@ module.exports = function(app) {
 
     console.log(req.body);
     console.log(req.user.id);
-    
-    //Set variable errors to pass to client in json response
-    var errors = req.validationErrors();
+
+    var errors = [];
+
+    //Validate input dates
+    if(!(moment(req.body.startDate, 'MM/DD/YYYY', true).isValid()) || !(moment(req.body.endDate, 'MM/DD/YYYY', true).isValid())){
+        errors.push("Invalid date");
+    }
 
     console.log("errors length", errors);
     //if no errors
-    if(!errors){
+    if(errors.length === 0){
       console.log("No errors");
 
-      db.invite.create({
-        startDate: req.body.startDate,
-        endDate: req.body.endDate,
-        farmId: req.user.id
-      }).then(function(dbNewPost){
-        console.log(dbNewPost);
-      });
+      //Convert dates into format 'YYYY/MM/DD'
+      var inStartDate = moment(req.body.startDate, 'MM/DD/YYYY').format('YYYY/MM/DD');
+      var inEndDate = moment(req.body.endDate, 'MM/DD/YYYY').format('YYYY/MM/DD');
+      var momentStartDate = moment(inStartDate, 'YYYY/MM/DD');
+      var momentEndDate = moment(inEndDate, 'YYYY/MM/DD');
+
+      console.log("Formatted dates, Start date: " + inStartDate + " " + inEndDate);
+
+      var diffInDates = momentEndDate.diff(momentStartDate, 'days') + 1;
+      console.log("Difference =" + diffInDates);
+
+      //Loop through to write record in invite table for each day starting from startdate
+      var currDate = momentStartDate;
+      for(var i = 0; i<diffInDates; i++){
+        console.log("Write record for Day: " + currDate.format('YYYY/MM/DD') + "startdate: " + inStartDate + "enddate: " + inEndDate);
+
+        //Write to invites table
+        db.invite.create({
+          startDate: inStartDate,
+          endDate: inEndDate,
+          taskDate: currDate.format('YYYY/MM/DD'),
+          magicalLink: "hello",
+          token: "spider",
+          farmId: req.user.id
+        }).then(function(dbNewPost){
+          console.log(dbNewPost);
+        });
+
+        currDate.add(1, 'days');
+      }
 
       res.json({valid: true, errors: errors});
     }else{
