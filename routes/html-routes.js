@@ -67,12 +67,6 @@ module.exports = function(app) {
       res.sendFile(path.join(__dirname + "/../public/schedule.html"));
     });
 
-    // Route for duties page -add custom middleware to redirect user to login page if not already logged in
-    //--------------------------------------------
-    app.get("/schedule",isAuthenticated, function(req, res) {
-      res.sendFile(path.join(__dirname + "/../public/schedule.html"));
-    });
-
   	app.get("/", function(req, res) {
   		res.redirect('/login');
   	});

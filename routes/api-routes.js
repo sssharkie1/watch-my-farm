@@ -21,6 +21,9 @@ var isAuthenticated = require("../config/middleware/isAuthenticated");
 //Site url
 var siteURL = "http://localhost:8000/";
 
+//Current date
+var currDate = moment().format('YYYY/MM/DD');
+
 // Routes
 // =============================================================
 module.exports = function(app) {
@@ -239,11 +242,13 @@ module.exports = function(app) {
 
     console.log("UserID" + req.user.id);
 
-    db.farm.findAll({
+    db.farm.findOne({
       where: {
         id: req.params.id
        }
      }).then(function(dbFarm){
+      console.log("In farm id handler---------");
+      console.log(dbFarm.id);
 
       res.json(dbFarm);
 
@@ -321,7 +326,7 @@ module.exports = function(app) {
       console.log("Gnemerated token: " + token);
 
       //Create magic link
-      var magicLink = siteURL + "?farm=" + req.user.id +"&token=" + token;
+      var magicLink = siteURL + "?token=" + token;
       console.log("Magic Link: " + magicLink);
 
       //Loop through to write record in invite table for each day starting from startdate
@@ -390,6 +395,44 @@ module.exports = function(app) {
   });
 
 // ------------------------------AMTASK---------------------------------------
+
+  //GET route for magicLink
+  //If a user accesses this link first check if a record exists in the invites table for the current date and the token.
+  //If exists populate the task table with tasks
+  app.get("/api/duties/:token", function(req,res, next){
+
+    db.invite.findOne({
+      where: {
+        token: req.params.token,
+        taskDate: currDate
+      }
+    }).then(function(dbInvite){
+
+        if(!dbInvite){
+
+          res.send("No tasks for " + currDate);
+
+        }else{
+          res.locals.farmid = dbInvite.farmId;
+          return next();
+        }
+
+    });
+
+  }, function(req,res){
+
+      db.animals.findAll({
+        where: {
+          farmId: res.locals.farmid
+        }
+      }).then(function(dbAnimals){
+
+        res.json(dbAnimals);
+
+      });
+  });
+
+
     // GET route for getting all of the AM tasks
   app.get("/api/amTask",isAuthenticated, function(req, res) {
 
