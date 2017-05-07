@@ -394,7 +394,7 @@ module.exports = function(app) {
       });
   });
 
-// ------------------------------AMTASK---------------------------------------
+// ------------------------------Duties---------------------------------------
 
   //GET route for magicLink
   //If a user accesses this link first check if a record exists in the invites table for the current date and the token.
@@ -417,7 +417,7 @@ module.exports = function(app) {
 
         }else{
 
-          res.send("No tasks for " + currDate);
+          res.json({isValid: false, message: "No tasks for " + currDate});
           
         }
 
@@ -450,11 +450,32 @@ module.exports = function(app) {
             .then(function(dbNewTask){
               console.log(newTask);
             });
+
+            //Send back isValid true and farmId
+            res.json({isValid: true, farmId: res.locals.farmId});
+
           }
 
         }
 
       });
+  });
+
+
+  //GET route to get all the tasks, to get all tasks for a day we may need date and farmid
+  app.get("/api/tasks/:id", function(req, res) {
+
+    db.task.findAll({
+      where: {
+        farmId: req.params.id,
+        taskDate: currDate
+       }
+     }).then(function(dbTasks){
+
+      res.json(dbTasks);
+
+    });
+
   });
 
 
@@ -522,21 +543,6 @@ module.exports = function(app) {
       });
   });
 // ------------------------------PMTASK---------------------------------------
-
-  //GET route to get all the tasks, to get  all tasks for a day we may need date and farmid
-  app.get("/api/tasks", function(req, res) {
-
-    db.task.findAll({
-      where: {
-        id: req.user.id
-       }
-     }).then(function(dbPMTask){
-
-      res.json(dbPMTask);
-
-    });
-
-  });
 
     // GET route for getting all of the AM tasks
   app.get("/api/pmTask",isAuthenticated, function(req, res) {
