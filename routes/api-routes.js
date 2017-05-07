@@ -17,6 +17,9 @@ var shortid = require('shortid');
 
 // Requiring our custom middleware for checking if a user is logged in
 var isAuthenticated = require("../config/middleware/isAuthenticated");
+  
+//Site url
+var siteURL = "http://localhost:8000/";
 
 // Routes
 // =============================================================
@@ -313,6 +316,14 @@ module.exports = function(app) {
       var diffInDates = momentEndDate.diff(momentStartDate, 'days') + 1;
       console.log("Difference =" + diffInDates);
 
+      //Generate a token using package shortid
+      var token = shortid.generate();
+      console.log("Gnemerated token: " + token);
+
+      //Create magic link
+      var magicLink = siteURL + "?farm=" + req.user.id +"&token=" + token;
+      console.log("Magic Link: " + magicLink);
+
       //Loop through to write record in invite table for each day starting from startdate
       var currDate = momentStartDate;
       for(var i = 0; i<diffInDates; i++){
@@ -323,8 +334,8 @@ module.exports = function(app) {
           startDate: inStartDate,
           endDate: inEndDate,
           taskDate: currDate.format('YYYY/MM/DD'),
-          magicalLink: "hello",
-          token: "spider",
+          magicalLink: magicLink,
+          token: token,
           farmId: req.user.id
         }).then(function(dbNewPost){
           console.log(dbNewPost);
