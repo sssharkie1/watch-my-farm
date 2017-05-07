@@ -408,13 +408,17 @@ module.exports = function(app) {
       }
     }).then(function(dbInvite){
 
-        if(!dbInvite){
+        if(dbInvite){
 
-          res.send("No tasks for " + currDate);
+          res.locals.farmid = dbInvite.farmId;
+          res.locals.startDate = dbInvite.startDate;
+          res.locals.endDate = dbInvite.endDate;
+          return next();
 
         }else{
-          res.locals.farmid = dbInvite.farmId;
-          return next();
+
+          res.send("No tasks for " + currDate);
+          
         }
 
     });
@@ -427,7 +431,28 @@ module.exports = function(app) {
         }
       }).then(function(dbAnimals){
 
-        res.json(dbAnimals);
+        if(dbAnimals || dbAnimals.length){
+
+          for(var i=0; i<dbAnimals.length; i++){
+            db.task.create({
+              amFood: db.Animals[i].AMFood,
+              pmFood: db.Animals[i].PMFood,
+              amMeds: db.Animals[i].AMMeds,
+              pmMeds: db.Animals[i].PMMeds,
+              amNotes: db.Animals[i].AMNotes,
+              pmNotes: db.Animals[i].PMNotes,
+              startDate: res.locals.startDate,
+              endDate: res.locals.endDate,
+              taskDate: currDate,
+              farmId: res.locals.farmId,
+              animalId: db.Animals[i].id
+            })
+            .then(function(dbNewTask){
+              console.log(newTask);
+            });
+          }
+
+        }
 
       });
   });
@@ -497,6 +522,22 @@ module.exports = function(app) {
       });
   });
 // ------------------------------PMTASK---------------------------------------
+
+  //GET route to get all the tasks, to get  all tasks for a day we may need date and farmid
+  app.get("/api/tasks", function(req, res) {
+
+    db.task.findAll({
+      where: {
+        id: req.user.id
+       }
+     }).then(function(dbPMTask){
+
+      res.json(dbPMTask);
+
+    });
+
+  });
+
     // GET route for getting all of the AM tasks
   app.get("/api/pmTask",isAuthenticated, function(req, res) {
 

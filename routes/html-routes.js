@@ -67,6 +67,12 @@ module.exports = function(app) {
       res.sendFile(path.join(__dirname + "/../public/schedule.html"));
     });
 
+    // Route for Duties page
+    //--------------------------------------------
+    app.get("/duties",function(req, res) {
+      res.sendFile(path.join(__dirname + "/../public/duties.html"));
+    });
+
   	app.get("/", function(req, res) {
   		res.redirect('/login');
   	});

@@ -240,6 +240,7 @@ $( document ).ready(function() {
 		$.get('/api/animals', function(data){
 			console.log("Anumal data send back from server---");
 			console.log(data);
+    
 			var arrAnimalsdata = [];
 			for(var i=0; i<data.length; i++){
 				arrAnimalsdata.push(createAnimalRow(data[i]));
@@ -285,7 +286,7 @@ $( document ).ready(function() {
 
 	function renderEmpty(){
 		var alertDiv = $("<div>");
-    	alertDiv.addClass("alert alert-danger");
+    	alertDiv.addClass("alert alert-info");
     	alertDiv.html("Welcome! Let's get started! Click the button below to add animals to your farm");
     	$('#animals-table').prepend(alertDiv);
 	}
