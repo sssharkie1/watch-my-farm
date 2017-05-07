@@ -433,23 +433,47 @@ module.exports = function(app) {
 
         if(dbAnimals || dbAnimals.length){
 
+          //Create AM task record and or PM task record in the task table based on data in the animals table
+
           for(var i=0; i<dbAnimals.length; i++){
-            db.task.create({
-              amFood: db.Animals[i].AMFood,
-              pmFood: db.Animals[i].PMFood,
-              amMeds: db.Animals[i].AMMeds,
-              pmMeds: db.Animals[i].PMMeds,
-              amNotes: db.Animals[i].AMNotes,
-              pmNotes: db.Animals[i].PMNotes,
-              startDate: res.locals.startDate,
-              endDate: res.locals.endDate,
-              taskDate: currDate,
-              farmId: res.locals.farmId,
-              animalId: db.Animals[i].id
-            })
-            .then(function(dbNewTask){
-              console.log(newTask);
-            });
+
+            //If any of the AM related fields have value populate task table with a record and set timeOfDay field to 'AM'
+            if(db.Animals[i].AMFood || db.Animals[i].AMMeds || db.Animals[i].AMNotes){
+              db.task.create({
+                food: db.Animals[i].AMFood,
+                meds: db.Animals[i].AMMeds,
+                notes: db.Animals[i].AMNotes,
+                timeOfDay: 'AM',
+                startDate: res.locals.startDate,
+                endDate: res.locals.endDate,
+                taskDate: currDate,
+                farmId: res.locals.farmId,
+                animalId: db.Animals[i].id
+              })
+              .then(function(dbNewTask){
+                console.log(newTask);
+              });
+
+            }
+
+            //If any of the PM related fields have value populate task table with a record and set timeOfDay field to 'PM'
+            if(db.Animals[i].PMFood || db.Animals[i].PMMeds || db.Animals[i].PMNotes){
+              db.task.create({
+                food: db.Animals[i].PMFood,
+                meds: db.Animals[i].PMMeds,
+                notes: db.Animals[i].PMNotes,
+                timeOfDay: 'PM',
+                startDate: res.locals.startDate,
+                endDate: res.locals.endDate,
+                taskDate: currDate,
+                farmId: res.locals.farmId,
+                animalId: db.Animals[i].id
+              })
+              .then(function(dbNewTask){
+                console.log(newTask);
+              });
+
+            }
 
             //Send back isValid true and farmId
             res.json({isValid: true, farmId: res.locals.farmId});
@@ -470,6 +494,7 @@ module.exports = function(app) {
         farmId: req.params.id,
         taskDate: currDate
        }
+       include: [db.animals]
      }).then(function(dbTasks){
 
       res.json(dbTasks);
