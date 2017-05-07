@@ -417,7 +417,7 @@ module.exports = function(app) {
 
         }else{
 
-          res.json({isValid: false, message: "No tasks for " + currDate});
+          res.json({isValid: false, message: "Welcome! No duties for " + currDate + ". Please come back and check in later."});
           
         }
 

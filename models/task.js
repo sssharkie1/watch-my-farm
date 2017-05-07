@@ -1,26 +1,18 @@
 module.exports = function(sequelize, DataTypes) {
   var task = sequelize.define("task", {
-    amFood: {
+    food: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    amMeds: {
+    meds: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    amNotes: {
+    notes: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    pmFood: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    pmMeds: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    pmNotes: {
+    timeOfDay: {
       type: DataTypes.STRING,
       allowNull: true
     },
