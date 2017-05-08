@@ -276,7 +276,7 @@ module.exports = function(app) {
   // });
   
 // ------------------------------INVITE---------------------------------------
-    // GET route for getting all of the invites
+    // GET route for getting all of the invites, ordered by most recent trip
   app.get("/api/invite",isAuthenticated, function(req, res) {
 
     console.log("UserID" + req.user.id);
@@ -284,7 +284,8 @@ module.exports = function(app) {
     db.invite.findAll({
       where: {
         id: req.user.id
-       }
+       },
+       order: [["createdAt", "DESC"]]
      }).then(function(dbInviteInfo){
 
       res.json(dbInviteInfo);
@@ -522,52 +523,6 @@ module.exports = function(app) {
   });
 
 
-    // GET route for getting all of the AM tasks
-  app.get("/api/amTask",isAuthenticated, function(req, res) {
-
-    console.log("UserID" + req.user.id);
-
-    db.task.findAll({
-      where: {
-        id: req.user.id
-       }
-     }).then(function(dbAMTask){
-
-      res.json(dbAMTask);
-
-    });
-
-  });
-
-  // POST route for saving new AM tasks. You can create a task using the data on req.body
-  // app.post("/api/amTask", isAuthenticated, function(req, res) {
-
-  //   console.log(req.body);
-  //   console.log(req.user.id);
-    
-  //   //Set variable errors to pass to client in json response
-  //   var errors = req.validationErrors();
-
-  //   console.log("errors length", errors);
-  //   //if no errors
-  //   if(!errors){
-  //     console.log("No errors");
-
-  //     db.task.create({
-  //       amTasks: req.body.startDate,
-  //       farmId: req.user.id
-  //     }).then(function(dbNewAMTask){
-  //       console.log(dbNewAMTask);
-  //     });
-
-  //     res.json({valid: true, errors: errors});
-  //   }else{
-  //     console.log("there are errors");
-  //     res.json({valid: false, errors: errors});
-  //   }
-
-  // });
-
   // PUT route for updating tasks. The updated task id and complete status will be available in req.body
 
     app.put("/api/tasks", function(req, res) {
@@ -604,50 +559,5 @@ module.exports = function(app) {
 
   });
 
-  // POST route for saving new PM tasks. You can create a task using the data on req.body
-  // app.post("/api/pmTask", isAuthenticated, function(req, res) {
 
-  //   console.log(req.body);
-  //   console.log(req.user.id);
-    
-  //   //Set variable errors to pass to client in json response
-  //   var errors = req.validationErrors();
-
-  //   console.log("errors length", errors);
-  //   //if no errors
-  //   if(!errors){
-  //     console.log("No errors");
-
-  //     db.task.create({
-  //       pmTasks: req.body.startDate,
-  //       farmId: req.user.id
-  //     }).then(function(dbNewPMTask){
-  //       console.log(dbNewPMTask);
-  //     });
-
-  //     res.json({valid: true, errors: errors});
-  //   }else{
-  //     console.log("there are errors");
-  //     res.json({valid: false, errors: errors});
-  //   }
-
-  // });
-
-  // PUT route for updating PMTask. The updated task will be available in req.body
-
-  app.put("/api/pmTask",isAuthenticated, function(req, res) {
-
-    console.log("Inside put for pmTask info");
-    console.log(req.user.id);
-    console.log(req.body);
-
-      db.task.update(req.body,
-      {
-        where:{
-          id: req.user.id
-        } 
-      }).then(function(dbtask){
-        res.json(dbtask);
-      });
-  });
   }
