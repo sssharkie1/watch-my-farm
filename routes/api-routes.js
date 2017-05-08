@@ -68,6 +68,7 @@ module.exports = function(app) {
         password: req.body.password,
         farmName: req.body.farmname,
         address: req.body.address,
+        zipcode: req.body.zipcode,
         homePhone: req.body.homephone,
         cellPhone: req.body.cellphone,
         emergencyName: req.body.emergencyname,
@@ -405,6 +406,7 @@ module.exports = function(app) {
   //If a user accesses this link first check if a record exists in the invites table for the current date and the token.
   //If exists populate the task table with tasks
   app.get("/api/duties/:token", function(req,res, next){
+
 
     db.invite.findOne({
       where: {
