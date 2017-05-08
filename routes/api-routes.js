@@ -22,6 +22,7 @@ var isAuthenticated = require("../config/middleware/isAuthenticated");
 var siteURL = "http://localhost:8000/";
 
 //Current date
+var dateFormat = 'MM-DD-YYYY';
 var currDate = moment().format('YYYY/MM/DD');
 
 // Routes
@@ -326,7 +327,7 @@ module.exports = function(app) {
       console.log("Gnemerated token: " + token);
 
       //Create magic link
-      var magicLink = siteURL + "?token=" + token;
+      var magicLink = siteURL + "duties/?token=" + token;
       console.log("Magic Link: " + magicLink);
 
       //Loop through to write record in invite table for each day starting from startdate
@@ -424,65 +425,82 @@ module.exports = function(app) {
     });
 
   }, function(req,res){
+    console.log("inside 3rd handler , printing res.locals " + res.locals.farmid + res.locals.startDate + res.locals.endDate + currDate);
 
-      db.animals.findAll({
+      //Add logic to add records to task table only if no record exists for currDate and farmId
+
+      db.task.findOne({
         where: {
-          farmId: res.locals.farmid
+          farmId: res.locals.farmid,
+          taskDate: currDate
         }
-      }).then(function(dbAnimals){
+      }).then(function(dbTasks){
+        if(!dbTasks || (dbTasks.length === 0)){
+            db.animals.findAll({
+              where: {
+                farmId: res.locals.farmid
+              }
+            }).then(function(dbAnimals){
+              console.log(dbAnimals);
 
-        if(dbAnimals || dbAnimals.length){
+              if(dbAnimals || dbAnimals.length){
 
-          //Create AM task record and or PM task record in the task table based on data in the animals table
+                //Create AM task record and or PM task record in the task table based on data in the animals table
 
-          for(var i=0; i<dbAnimals.length; i++){
+                for(var i=0; i<dbAnimals.length; i++){
 
-            //If any of the AM related fields have value populate task table with a record and set timeOfDay field to 'AM'
-            if(db.Animals[i].AMFood || db.Animals[i].AMMeds || db.Animals[i].AMNotes){
-              db.task.create({
-                food: db.Animals[i].AMFood,
-                meds: db.Animals[i].AMMeds,
-                notes: db.Animals[i].AMNotes,
-                timeOfDay: 'AM',
-                startDate: res.locals.startDate,
-                endDate: res.locals.endDate,
-                taskDate: currDate,
-                farmId: res.locals.farmId,
-                animalId: db.Animals[i].id
-              })
-              .then(function(dbNewTask){
-                console.log(newTask);
-              });
+                  //If any of the AM related fields have value populate task table with a record and set timeOfDay field to 'AM'
+                  if(dbAnimals[i].AMFood || dbAnimals[i].AMMeds || dbAnimals[i].AMNotes){
+                    db.task.create({
+                      food: dbAnimals[i].AMFood,
+                      meds: dbAnimals[i].AMMeds,
+                      notes: dbAnimals[i].AMNotes,
+                      timeOfDay: 'AM',
+                      startDate: res.locals.startDate,
+                      endDate: res.locals.endDate,
+                      taskDate: currDate,
+                      farmId: res.locals.farmid,
+                      animalId: dbAnimals[i].id
+                    })
+                    .then(function(dbNewTask){
+                      console.log(dbNewTask);
+                    });
 
-            }
+                  }
 
-            //If any of the PM related fields have value populate task table with a record and set timeOfDay field to 'PM'
-            if(db.Animals[i].PMFood || db.Animals[i].PMMeds || db.Animals[i].PMNotes){
-              db.task.create({
-                food: db.Animals[i].PMFood,
-                meds: db.Animals[i].PMMeds,
-                notes: db.Animals[i].PMNotes,
-                timeOfDay: 'PM',
-                startDate: res.locals.startDate,
-                endDate: res.locals.endDate,
-                taskDate: currDate,
-                farmId: res.locals.farmId,
-                animalId: db.Animals[i].id
-              })
-              .then(function(dbNewTask){
-                console.log(newTask);
-              });
+                  //If any of the PM related fields have value populate task table with a record and set timeOfDay field to 'PM'
+                  if(dbAnimals[i].PMFood || dbAnimals[i].PMMeds || dbAnimals[i].PMNotes){
+                    db.task.create({
+                      food: dbAnimals[i].PMFood,
+                      meds: dbAnimals[i].PMMeds,
+                      notes: dbAnimals[i].PMNotes,
+                      timeOfDay: 'PM',
+                      startDate: res.locals.startDate,
+                      endDate: res.locals.endDate,
+                      taskDate: currDate,
+                      farmId: res.locals.farmid,
+                      animalId: dbAnimals[i].id
+                    })
+                    .then(function(dbNewTask){
+                      console.log(dbNewTask);
+                    });
 
-            }
+                  }
 
-            //Send back isValid true and farmId
-            res.json({isValid: true, farmId: res.locals.farmId});
+                  //Send back isValid true and farmId
+                  res.json({isValid: true, farmId: res.locals.farmid});
 
-          }
+                }
 
+              }
+
+            });
+        }else{
+          //Send back isValid true and farmId
+          res.json({isValid: true, farmId: res.locals.farmid});
         }
-
       });
+
   });
 
 
@@ -493,7 +511,7 @@ module.exports = function(app) {
       where: {
         farmId: req.params.id,
         taskDate: currDate
-       }
+       },
        include: [db.animals]
      }).then(function(dbTasks){
 
@@ -550,20 +568,20 @@ module.exports = function(app) {
 
   // });
 
-  // PUT route for updating AMTask. The updated task will be available in req.body
+  // PUT route for updating tasks. The updated task id and complete status will be available in req.body
 
-    app.put("/api/amTask",isAuthenticated, function(req, res) {
+    app.put("/api/tasks", function(req, res) {
 
-    console.log("Inside put for AMTask info");
-    console.log(req.user.id);
+    console.log("Inside put for tasks info");
     console.log(req.body);
 
-      db.task.update(req.body,
+      db.task.update({complete: req.body.complete},
       {
         where:{
-          id: req.user.id
+          id: req.body.id
         } 
       }).then(function(dbtask){
+        console.log("inside put for api/tasks: " + dbtask);
         res.json(dbtask);
       });
   });

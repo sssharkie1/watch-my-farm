@@ -70,6 +70,7 @@ module.exports = function(app) {
     // Route for Duties page
     //--------------------------------------------
     app.get("/duties",function(req, res) {
+      console.log("In the html route for duties");
       res.sendFile(path.join(__dirname + "/../public/duties.html"));
     });
 

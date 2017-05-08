@@ -1,3 +1,5 @@
+var moment = require('moment');
+
 module.exports = function(sequelize, DataTypes) {
   var task = sequelize.define("task", {
     food: {
@@ -17,24 +19,24 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     startDate: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.DATEONLY/*,
       get: function() {
         return moment.utc(this.getDataValue('startDate')).format('MM-DD-YYYY');
-      }       
+      }       */
       //allowNull: true
     },
     endDate: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.DATEONLY/*,
       get: function() {
         return moment.utc(this.getDataValue('endDate')).format('MM-DD-YYYY');
-      }      
+      }      */
       //allowNull: true
     },
     taskDate: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.DATEONLY/*,
       get: function() {
         return moment.utc(this.getDataValue('taskDate')).format('MM-DD-YYYY');
-      }      
+      }      */
       //allowNull: true
     },         
     complete: {

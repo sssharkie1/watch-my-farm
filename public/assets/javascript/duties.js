@@ -6,21 +6,36 @@ $( document ).ready(function() {
 	var tokenId;
 	var farmId;
 
-	var token;
+	var token = 'SktkvUayZ';
+	getDuties(token);
 
-	if(url.indexOf("?token=") !== -1){
+/*	if(url.indexOf("?token=") !== -1){
 		token = url.split("=")[1];
 		getDuties(token);
-	}
+	}*/
 
 	function createTaskRow(tasks){
 		console.log(tasks);
 		var newTr = $("<tr>");
 	    newTr.data("farm", tasks.farmId);
-	    newTr.append("<td>" + tasks.food + "</td>");
-	    newTr.append("<td>" + tasks.meds + "</td>");
-	    newTr.append("<td>" + tasks.notes + "</td>");
-	    newTr.append("<td><form><input type='checkbox' class='completeTask' data-taskid = " + tasks.id + "></form></td>");
+	    newTr.append("<td class='text-center'>" + tasks.animal.animalType + "</td>");
+	    newTr.append("<td class='text-center'>" + tasks.animal.animalName + "</td>");
+	    newTr.append("<td class='text-center'>" + tasks.food + "</td>");
+	    newTr.append("<td class='text-center'>" + tasks.meds + "</td>");
+	    newTr.append("<td class='text-center'>" + tasks.notes + "</td>");
+	    /*newTr.append("<td class='text-center'><form><input type='checkbox' class='completeTask' data-taskid = " + tasks.id + " value=" + tasks.id + " id = check-" + tasks.id + "></form></td>");
+*/
+	    //Update check box
+	    if(tasks.complete){
+	    	console.log("inside tasks complete " + tasks.complete);
+	    	newTr.append("<td class='text-center'><form><input type='checkbox' class='completeTask' data-taskid = " + tasks.id + " value=" + tasks.id + " id = check-" + tasks.id + " checked></form></td>");
+	    	/*$('#check-' + tasks.id).prop('checked', true);*/
+	    }else{
+	    	console.log("inside tasks complete " + tasks.complete);
+	    	newTr.append("<td class='text-center'><form><input type='checkbox' class='completeTask' data-taskid = " + tasks.id + " value=" + tasks.id + " id = check-" + tasks.id + "></form></td>");
+	    	/*$('#check-' + tasks.id).prop('checked', false);*/
+	    }
+
 
 	    return newTr;
 
@@ -29,7 +44,8 @@ $( document ).ready(function() {
 	function getDuties(token){
 		tokenId = token || '';
 		if(tokenId){
-			tokenId = "/?token_id=" + tokenId;
+			/*tokenId = "/?token_id=" + tokenId;*/
+			tokenId = "/" + tokenId;
 		}
 		$.get("/api/duties" + tokenId, function(data){
 			console.log("Response from ajax /api/duties: ", data);
@@ -49,7 +65,7 @@ $( document ).ready(function() {
 	function getTasksForToday(farmid){
 		farmId = farmid || '';
 		if(farmId){
-			farmId = "/?farm_id=" + farmId;
+			farmId = "/" + farmId;
 		}
 		$.get("/api/tasks" + farmId, function(data){
 			console.log("Response from ajax /api/tasks: ", data);
@@ -73,7 +89,7 @@ $( document ).ready(function() {
 	}
 
 	function renderDuties(rows, timeOfDay){
-		$('#amduties-table').children('alert').remove();
+		$('#AM-duties-list').children('alert').remove();
 		if(rows.length && (timeOfDay === 'AM')){
 			console.log(rows);
 			$('#amduties-table').children('tbody').prepend(rows);
@@ -89,15 +105,39 @@ $( document ).ready(function() {
 		var alertDiv = $("<div>");
     	alertDiv.addClass("alert alert-info");
     	alertDiv.html(msg);
-    	$('#amduties-table').prepend(alertDiv);
+    	$('#AM-duties-list').prepend(alertDiv);
+	}
+
+	function updateTask(task_Id, complete){
+		$.ajax({
+      		method: "PUT",
+      		url: "/api/tasks",
+      		data: {id: task_Id, complete: complete}
+    	})
+    	.done(function(affectedRows) {
+    		console.log("Inside updated task " + affectedRows);
+    		//promise returns an array with number of rows affected as first element
+
+    		if(affectedRows[0] !== 1){
+    			window.location.href = "/duties"; //have to load page with the token url or the magic link
+    		}
+
+      		
+    	});
+
 	}
 
 	$(document).on('change', ':checkbox', function(){
+		var task_Id = $(this).val();
+		var complete = false;
 		if($(this).is(':checked')){
 			console.log($(this).val() + ' is now checked');
+			complete = true;
+			updateTask(task_Id, complete);
     	} else {
         	console.log($(this).val() + ' is now unchecked');
+        	updateTask(task_Id, complete);
     	}
-	})
+	});
 
 });
