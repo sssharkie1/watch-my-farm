@@ -6,7 +6,7 @@ $( document ).ready(function() {
 	var tokenId;
 	var farmId;
 
-	var token = 'B13te8AJW';
+	var token = 'H1N68LAJb';
 	getDuties(token);
 
 /*	if(url.indexOf("?token=") !== -1){
