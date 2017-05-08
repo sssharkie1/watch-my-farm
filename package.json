@@ -35,7 +35,8 @@
     "react-dom": "^15.5.4",
     "react-router": "^4.1.1",
     "react-tap-event-plugin": "^2.0.1",
-    "sequelize": "^3.30.4"
+    "sequelize": "^3.30.4",
+    "shortid": "^2.2.8"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",

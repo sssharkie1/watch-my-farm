@@ -8,9 +8,23 @@
 // Grabbing our models
 var db = require("../models");
 var passport = require("../config/passport");
+var sequelize = require('sequelize');
+
+// Moment js - for date manipulations
+var moment = require('moment');
+
+//Shortid - to generate token for magic link
+var shortid = require('shortid');
 
 // Requiring our custom middleware for checking if a user is logged in
 var isAuthenticated = require("../config/middleware/isAuthenticated");
+  
+//Site url
+var siteURL = "http://localhost:8000/";
+
+//Current date
+var dateFormat = 'MM-DD-YYYY';
+var currDate = moment().format('YYYY/MM/DD');
 
 // Routes
 // =============================================================
@@ -231,11 +245,13 @@ module.exports = function(app) {
 
     console.log("UserID" + req.user.id);
 
-    db.farm.findAll({
+    db.farm.findOne({
       where: {
         id: req.params.id
        }
      }).then(function(dbFarm){
+      console.log("In farm id handler---------");
+      console.log(dbFarm.id);
 
       res.json(dbFarm);
 
@@ -262,15 +278,18 @@ module.exports = function(app) {
   // });
   
 // ------------------------------INVITE---------------------------------------
-    // GET route for getting all of the invites
+    // GET route for getting all of the invites, ordered by most recent trip
   app.get("/api/invite",isAuthenticated, function(req, res) {
 
     console.log("UserID" + req.user.id);
 
     db.invite.findAll({
       where: {
-        id: req.user.id
-       }
+        farmId: req.user.id
+       },
+       attributes:[[sequelize.literal('distinct `startDate`'),'startDate'],
+        [sequelize.literal('`endDate`'),'endDate'],[sequelize.literal('`magicalLink`'),'magicalLink'],[sequelize.literal('`farmId`'),'farmId']],
+       order: [["createdAt", "DESC"]]
      }).then(function(dbInviteInfo){
 
       res.json(dbInviteInfo);
@@ -284,22 +303,57 @@ module.exports = function(app) {
 
     console.log(req.body);
     console.log(req.user.id);
-    
-    //Set variable errors to pass to client in json response
-    var errors = req.validationErrors();
+
+    var errors = [];
+
+    //Validate input dates
+    if(!(moment(req.body.startDate, 'MM/DD/YYYY', true).isValid()) || !(moment(req.body.endDate, 'MM/DD/YYYY', true).isValid())){
+        errors.push("Invalid date");
+    }
 
     console.log("errors length", errors);
     //if no errors
-    if(!errors){
+    if(errors.length === 0){
       console.log("No errors");
 
-      db.invite.create({
-        startDate: req.body.startDate,
-        endDate: req.body.endDate,
-        farmId: req.user.id
-      }).then(function(dbNewPost){
-        console.log(dbNewPost);
-      });
+      //Convert dates into format 'YYYY/MM/DD'
+      var inStartDate = moment(req.body.startDate, 'MM/DD/YYYY').format('YYYY/MM/DD');
+      var inEndDate = moment(req.body.endDate, 'MM/DD/YYYY').format('YYYY/MM/DD');
+      var momentStartDate = moment(inStartDate, 'YYYY/MM/DD');
+      var momentEndDate = moment(inEndDate, 'YYYY/MM/DD');
+
+      console.log("Formatted dates, Start date: " + inStartDate + " " + inEndDate);
+
+      var diffInDates = momentEndDate.diff(momentStartDate, 'days') + 1;
+      console.log("Difference =" + diffInDates);
+
+      //Generate a token using package shortid
+      var token = shortid.generate();
+      console.log("Gnemerated token: " + token);
+
+      //Create magic link
+      var magicLink = siteURL + "duties/?token=" + token;
+      console.log("Magic Link: " + magicLink);
+
+      //Loop through to write record in invite table for each day starting from startdate
+      var currDate = momentStartDate;
+      for(var i = 0; i<diffInDates; i++){
+        console.log("Write record for Day: " + currDate.format('YYYY/MM/DD') + "startdate: " + inStartDate + "enddate: " + inEndDate);
+
+        //Write to invites table
+        db.invite.create({
+          startDate: inStartDate,
+          endDate: inEndDate,
+          taskDate: currDate.format('YYYY/MM/DD'),
+          magicalLink: magicLink,
+          token: token,
+          farmId: req.user.id
+        }).then(function(dbNewPost){
+          console.log(dbNewPost);
+        });
+
+        currDate.add(1, 'days');
+      }
 
       res.json({valid: true, errors: errors});
     }else{
@@ -346,71 +400,153 @@ module.exports = function(app) {
       });
   });
 
-// ------------------------------AMTASK---------------------------------------
-    // GET route for getting all of the AM tasks
-  app.get("/api/amTask",isAuthenticated, function(req, res) {
+// ------------------------------Duties---------------------------------------
 
-    console.log("UserID" + req.user.id);
+  //GET route for magicLink
+  //If a user accesses this link first check if a record exists in the invites table for the current date and the token.
+  //If exists populate the task table with tasks
+  app.get("/api/duties/:token", function(req,res, next){
 
-    db.animals.findAll({
+
+    db.invite.findOne({
       where: {
-        id: req.user.id
-       }
-     }).then(function(dbAMTask){
+        token: req.params.token,
+        taskDate: currDate
+      }
+    }).then(function(dbInvite){
 
-      res.json(dbAMTask);
+        if(dbInvite){
+
+          res.locals.farmid = dbInvite.farmId;
+          res.locals.startDate = dbInvite.startDate;
+          res.locals.endDate = dbInvite.endDate;
+          return next();
+
+        }else{
+
+          res.json({isValid: false, message: "Welcome! No duties for " + currDate + ". Please come back and check in later."});
+          
+        }
+
+    });
+
+  }, function(req,res){
+    console.log("inside 3rd handler , printing res.locals " + res.locals.farmid + res.locals.startDate + res.locals.endDate + currDate);
+
+      //Add logic to add records to task table only if no record exists for currDate and farmId
+
+      db.task.findOne({
+        where: {
+          farmId: res.locals.farmid,
+          taskDate: currDate
+        }
+      }).then(function(dbTasks){
+        if(!dbTasks || (dbTasks.length === 0)){
+            db.animals.findAll({
+              where: {
+                farmId: res.locals.farmid
+              }
+            }).then(function(dbAnimals){
+              console.log(dbAnimals);
+
+              if(dbAnimals || dbAnimals.length){
+
+                //Create AM task record and or PM task record in the task table based on data in the animals table
+
+                for(var i=0; i<dbAnimals.length; i++){
+
+                  //If any of the AM related fields have value populate task table with a record and set timeOfDay field to 'AM'
+                  if(dbAnimals[i].AMFood || dbAnimals[i].AMMeds || dbAnimals[i].AMNotes){
+                    db.task.create({
+                      food: dbAnimals[i].AMFood,
+                      meds: dbAnimals[i].AMMeds,
+                      notes: dbAnimals[i].AMNotes,
+                      timeOfDay: 'AM',
+                      startDate: res.locals.startDate,
+                      endDate: res.locals.endDate,
+                      taskDate: currDate,
+                      farmId: res.locals.farmid,
+                      animalId: dbAnimals[i].id
+                    })
+                    .then(function(dbNewTask){
+                      console.log(dbNewTask);
+                    });
+
+                  }
+
+                  //If any of the PM related fields have value populate task table with a record and set timeOfDay field to 'PM'
+                  if(dbAnimals[i].PMFood || dbAnimals[i].PMMeds || dbAnimals[i].PMNotes){
+                    db.task.create({
+                      food: dbAnimals[i].PMFood,
+                      meds: dbAnimals[i].PMMeds,
+                      notes: dbAnimals[i].PMNotes,
+                      timeOfDay: 'PM',
+                      startDate: res.locals.startDate,
+                      endDate: res.locals.endDate,
+                      taskDate: currDate,
+                      farmId: res.locals.farmid,
+                      animalId: dbAnimals[i].id
+                    })
+                    .then(function(dbNewTask){
+                      console.log(dbNewTask);
+                    });
+
+                  }
+
+                  //Send back isValid true and farmId
+                  res.json({isValid: true, farmId: res.locals.farmid});
+
+                }
+
+              }
+
+            });
+        }else{
+          //Send back isValid true and farmId
+          res.json({isValid: true, farmId: res.locals.farmid});
+        }
+      });
+
+  });
+
+
+  //GET route to get all the tasks, to get all tasks for a day we may need date and farmid
+  app.get("/api/tasks/:id", function(req, res) {
+
+    db.task.findAll({
+      where: {
+        farmId: req.params.id,
+        taskDate: currDate
+       },
+       include: [db.animals]
+     }).then(function(dbTasks){
+
+      res.json(dbTasks);
 
     });
 
   });
 
-  // POST route for saving new AM tasks. You can create a task using the data on req.body
-  // app.post("/api/amTask", isAuthenticated, function(req, res) {
 
-  //   console.log(req.body);
-  //   console.log(req.user.id);
-    
-  //   //Set variable errors to pass to client in json response
-  //   var errors = req.validationErrors();
+  // PUT route for updating tasks. The updated task id and complete status will be available in req.body
 
-  //   console.log("errors length", errors);
-  //   //if no errors
-  //   if(!errors){
-  //     console.log("No errors");
+    app.put("/api/tasks", function(req, res) {
 
-  //     db.task.create({
-  //       amTasks: req.body.startDate,
-  //       farmId: req.user.id
-  //     }).then(function(dbNewAMTask){
-  //       console.log(dbNewAMTask);
-  //     });
-
-  //     res.json({valid: true, errors: errors});
-  //   }else{
-  //     console.log("there are errors");
-  //     res.json({valid: false, errors: errors});
-  //   }
-
-  // });
-
-  // PUT route for updating AMTask. The updated task will be available in req.body
-
-    app.put("/api/amTask",isAuthenticated, function(req, res) {
-
-    console.log("Inside put for AMTask info");
-    console.log(req.user.id);
+    console.log("Inside put for tasks info");
     console.log(req.body);
 
-      db.task.update(req.body,
+      db.task.update({complete: req.body.complete},
       {
         where:{
-          id: req.user.id
+          id: req.body.id
         } 
       }).then(function(dbtask){
+        console.log("inside put for api/tasks: " + dbtask);
         res.json(dbtask);
       });
   });
 // ------------------------------PMTASK---------------------------------------
+
     // GET route for getting all of the AM tasks
   app.get("/api/pmTask",isAuthenticated, function(req, res) {
 
@@ -428,50 +564,5 @@ module.exports = function(app) {
 
   });
 
-  // POST route for saving new PM tasks. You can create a task using the data on req.body
-  // app.post("/api/pmTask", isAuthenticated, function(req, res) {
 
-  //   console.log(req.body);
-  //   console.log(req.user.id);
-    
-  //   //Set variable errors to pass to client in json response
-  //   var errors = req.validationErrors();
-
-  //   console.log("errors length", errors);
-  //   //if no errors
-  //   if(!errors){
-  //     console.log("No errors");
-
-  //     db.task.create({
-  //       pmTasks: req.body.startDate,
-  //       farmId: req.user.id
-  //     }).then(function(dbNewPMTask){
-  //       console.log(dbNewPMTask);
-  //     });
-
-  //     res.json({valid: true, errors: errors});
-  //   }else{
-  //     console.log("there are errors");
-  //     res.json({valid: false, errors: errors});
-  //   }
-
-  // });
-
-  // PUT route for updating PMTask. The updated task will be available in req.body
-
-  app.put("/api/pmTask",isAuthenticated, function(req, res) {
-
-    console.log("Inside put for pmTask info");
-    console.log(req.user.id);
-    console.log(req.body);
-
-      db.task.update(req.body,
-      {
-        where:{
-          id: req.user.id
-        } 
-      }).then(function(dbtask){
-        res.json(dbtask);
-      });
-  });
   }
