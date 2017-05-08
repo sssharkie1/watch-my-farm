@@ -8,6 +8,7 @@
 // Grabbing our models
 var db = require("../models");
 var passport = require("../config/passport");
+var sequelize = require('sequelize');
 
 // Moment js - for date manipulations
 var moment = require('moment');
@@ -283,8 +284,10 @@ module.exports = function(app) {
 
     db.invite.findAll({
       where: {
-        id: req.user.id
+        farmId: req.user.id
        },
+       attributes:[[sequelize.literal('distinct `startDate`'),'startDate'],
+        [sequelize.literal('`endDate`'),'endDate'],[sequelize.literal('`magicalLink`'),'magicalLink']],
        order: [["createdAt", "DESC"]]
      }).then(function(dbInviteInfo){
 
