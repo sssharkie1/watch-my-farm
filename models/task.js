@@ -19,24 +19,24 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     startDate: {
-      type: DataTypes.DATEONLY/*,
+      type: DataTypes.DATEONLY,
       get: function() {
-        return moment.utc(this.getDataValue('startDate')).format('MM-DD-YYYY');
-      }       */
+        return moment.utc(this.getDataValue('startDate')).format('YYYY-MM-DD');
+      }      
       //allowNull: true
     },
     endDate: {
-      type: DataTypes.DATEONLY/*,
+      type: DataTypes.DATEONLY,
       get: function() {
-        return moment.utc(this.getDataValue('endDate')).format('MM-DD-YYYY');
-      }      */
+        return moment.utc(this.getDataValue('endDate')).format('YYYY-MM-DD');
+      }      
       //allowNull: true
     },
     taskDate: {
-      type: DataTypes.DATEONLY/*,
+      type: DataTypes.DATEONLY,
       get: function() {
-        return moment.utc(this.getDataValue('taskDate')).format('MM-DD-YYYY');
-      }      */
+        return moment.utc(this.getDataValue('taskDate')).format('YYYY-MM-DD');
+      }      
       //allowNull: true
     },         
     complete: {

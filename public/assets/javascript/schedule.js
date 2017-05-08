@@ -36,11 +36,54 @@ $( document ).ready(function() {
     }
   } );
 
-    getAllInvites();
+    getMyTrips();
 
-    //AJAX get to get all invites corresponding to logged in user
-    function getAllInvites(){
+    function createTripRow(tripData){
+      console.log(tripData);
 
+      var tripDiv = $('<div class="col-md-6">');
+      tripDiv.addClass("text-center");
+      tripDiv.append("<h1 class='back-orange no-top-marg'>MAGIC LINK</h1>");
+      tripDiv.append("<p>For dates:</p>");;
+      tripDiv.append("<p>" + moment(tripData.startDate).format('MM/DD/YYYY') + " - " + moment(tripData.endDate).format('MM/DD/YYYY') + "</p>");
+      tripDiv.append("<p>Use Link:</p>");
+      tripDiv.append("<p>" + tripData.magicalLink + "</p>");
+
+      return tripDiv;
+    }
+    
+
+    //AJAX get to get all trips corresponding to logged in user
+    function getMyTrips(){
+
+        $.get("/api/invite", function(data){
+          console.log("Response from ajax /api/invite: ", data);
+
+          var arrTrips = [];
+          for(var i=0; i<data.length; i++){
+            arrTrips.push(createTripRow(data[i]));
+          }
+          console.log('trip div before render: ' + arrTrips);
+          renderTrips(arrTrips);
+      });
+
+    }
+
+    function renderTrips(tripRows){
+      $('#myTripsBody').children().remove();
+      if(tripRows.length){
+        console.log(tripRows);
+        $('#myTripsBody').append(tripRows);
+      }else{
+        renderEmpty();
+      }
+    }
+
+    function renderEmpty(){
+      var alertDiv = $("<div>");
+      alertDiv.addClass("alert alert-info");
+      alertDiv.html("No trips scheduled yet");
+      $('#myTripsBody').prepend(alertDiv);
     }
 
 
@@ -104,7 +147,9 @@ $( document ).ready(function() {
 
           console.log(data);
           if(data.valid){
-            window.location.href = "/schedule";
+            //window.location.href = "/schedule";
+            //send ajax request to api/invite to get all the recent trip details
+            getMyTrips();
           }
           else{
             displayErrors(data.errors);

@@ -6,7 +6,7 @@ $( document ).ready(function() {
 	var tokenId;
 	var farmId;
 
-	var token = 'B1Tj3-0yZ';
+	var token = 'B13te8AJW';
 	getDuties(token);
 
 /*	if(url.indexOf("?token=") !== -1){
@@ -59,7 +59,7 @@ $( document ).ready(function() {
 				renderEmpty(data.message);
 			}
 			
-		})
+		});
 	}
 
 	function getTasksForToday(farmid){

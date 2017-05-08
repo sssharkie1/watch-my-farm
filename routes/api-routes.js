@@ -287,7 +287,7 @@ module.exports = function(app) {
         farmId: req.user.id
        },
        attributes:[[sequelize.literal('distinct `startDate`'),'startDate'],
-        [sequelize.literal('`endDate`'),'endDate'],[sequelize.literal('`magicalLink`'),'magicalLink']],
+        [sequelize.literal('`endDate`'),'endDate'],[sequelize.literal('`magicalLink`'),'magicalLink'],[sequelize.literal('`farmId`'),'farmId']],
        order: [["createdAt", "DESC"]]
      }).then(function(dbInviteInfo){
 
