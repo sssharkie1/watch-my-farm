@@ -41,9 +41,9 @@ $( document ).ready(function() {
     function createTripRow(tripData){
       console.log(tripData);
 
-      var tripDiv = $('<div class="col-md-6">');
+      var tripDiv = $('<div class="bord-orange col-md-6">');
       tripDiv.addClass("text-center");
-      tripDiv.append("<h1 class='back-orange no-top-marg'>MAGIC LINK</h1>");
+      //tripDiv.append("<h1 class='back-orange no-top-marg'>MAGIC LINK</h1>");
       tripDiv.append("<p>For dates:</p>");;
       tripDiv.append("<p>" + moment(tripData.startDate).format('MM/DD/YYYY') + " - " + moment(tripData.endDate).format('MM/DD/YYYY') + "</p>");
       tripDiv.append("<p>Use Link:</p>");
