@@ -68,7 +68,10 @@ module.exports = function(app) {
     });
 
 
-        app.get("/duties",isAuthenticated, function(req, res) {
+    // Route for Duties page
+    //--------------------------------------------
+    app.get("/duties",function(req, res) {
+      console.log("In the html route for duties");
       res.sendFile(path.join(__dirname + "/../public/duties.html"));
     });
 

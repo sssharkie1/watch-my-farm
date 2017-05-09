@@ -5,6 +5,7 @@ $( document ).ready(function() {
 	var animalID;
 	var updating = false;
 	var farmInfo;
+  var errors = [];
 
 	//Get the initial list of animals from the database
     //-----------------------------------------------------
@@ -93,7 +94,7 @@ $( document ).ready(function() {
 
     	event.preventDefault();
 
-    	var errors = [];
+    	errors = [];
     	//clear the errors-div
     	$('#error-div').empty();
 
@@ -168,7 +169,7 @@ $( document ).ready(function() {
 
     	console.log("edit farm info button clicked");
 
-    	var errors = [];
+    	errors = [];
     	//clear the errors-div
     	$('#error-div').empty();
 
@@ -276,6 +277,7 @@ $( document ).ready(function() {
 		$.get('/api/animals', function(data){
 			console.log("Anumal data send back from server---");
 			console.log(data);
+    
 			var arrAnimalsdata = [];
 			for(var i=0; i<data.length; i++){
 				arrAnimalsdata.push(createAnimalRow(data[i]));
@@ -322,7 +324,7 @@ $( document ).ready(function() {
 
 	function renderEmpty(){
 		var alertDiv = $("<div>");
-    	alertDiv.addClass("alert alert-danger");
+    	alertDiv.addClass("alert alert-info");
     	alertDiv.html("Welcome! Let's get started! Click the button below to add animals to your farm");
     	$('#animals-table').prepend(alertDiv);
 	}
