@@ -6,13 +6,13 @@ $( document ).ready(function() {
 	var tokenId;
 	var farmId;
 
-	var token = 'H1N68LAJb';
-	getDuties(token);
+	/*var token = 'H1N68LAJb';
+	getDuties(token);*/
 
-/*	if(url.indexOf("?token=") !== -1){
+	if(url.indexOf("?token=") !== -1){
 		token = url.split("=")[1];
 		getDuties(token);
-	}*/
+	}
 
 	function createTaskRow(tasks){
 		console.log(tasks);
