@@ -187,14 +187,14 @@ module.exports = function(app) {
       });
     });
 
-  // DELETE route for deleting animals. You can access the animals id in req.params.id
-  // app.destroy("/api/animals/:id",isAuthenticated, function(req, res) {
+  // //DELETE route for deleting animals. You can access the animals id in req.params.id
+  // app.destroy("/api/animals/" + animalId, function(req, res) {
 
-  //   console.log("UserID" + req.user.id);
+  //   console.log("animalID" + animalId);
 
   //   db.animals.findAll({
   //     where: {
-  //       id: req.params.id
+  //       id: animalId
   //      }
   //    }).then(function(dbAnimalsDestroy){
 
@@ -400,7 +400,6 @@ module.exports = function(app) {
       });
   });
 
-// ------------------------------Duties---------------------------------------
 
   //GET route for magicLink
   //If a user accesses this link first check if a record exists in the invites table for the current date and the token.
@@ -410,6 +409,7 @@ module.exports = function(app) {
 
     db.invite.findOne({
       where: {
+
         token: req.params.token,
         taskDate: currDate
       }
@@ -509,7 +509,6 @@ module.exports = function(app) {
 
   });
 
-
   //GET route to get all the tasks, to get all tasks for a day we may need date and farmid
   app.get("/api/tasks/:id", function(req, res) {
 
@@ -566,3 +565,4 @@ module.exports = function(app) {
 
 
   }
+
