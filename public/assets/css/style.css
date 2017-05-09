@@ -47,6 +47,10 @@ p {
 	border: 2px solid #FFB523;
 }
 
+.bord-orange {
+	border: 2px solid #FFB523;
+}
+
 .footer {
 	margin-top: 400px;
 	background-color: #4CBF9E;
@@ -123,6 +127,10 @@ a:hover, a:focus {
 
 }
 
+.intro {
+	color: #1E211F;
+}
+
 .red-button:hover, .red-button:focus, .red-button:active {
 	box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 5px 5px 0 rgba(0,0,0,0.19);
 	background-color: #4CBF9E;
@@ -167,6 +175,10 @@ a:hover, a:focus {
 
 #farmTitle{
 	text-transform: uppercase;
+}
+
+#scheduleTrip {
+	width: 95%;
 }
 
 #scheduleTripBody, #animals-table, #farmInfo {
