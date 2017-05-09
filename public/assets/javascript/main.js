@@ -51,6 +51,40 @@ $( document ).ready(function() {
 
   		}
 	});
+
+    //Check if Modal was triggered by remove click
+    $('#removeAnimal').on('show.bs.modal', function (event) {
+
+      //Check if button has a data attribute that stores animalid, if it does it means that it was triggered by the remove button
+    var button = $(event.relatedTarget) // Button that triggered the modal
+      var animalId = button.data('animalid'); // Extract info from data-* attributes
+
+      if(animalId){
+        //assign to global variable "animalID" and set updating to true
+        animalID = animalId;
+        updating = true;
+
+        var modal = $(this);
+        modal.find('.modal-title').text('Delete Animal');
+
+        //Get animal data for the animalID and prepopulate the modal fields
+        $.destroy('/api/animals/' + animalId, function(data){
+        console.log("Animal data send back from server for ID---" + animalId);
+        
+      }).done(function(animalData){
+        console.log("is this working?" + animalData);
+
+          modal.find('#animal-type').val(animalData[0].animalType).attr("disabled", true);
+          modal.find('#animal-name').val(animalData[0].animalName);
+          modal.find('#animal-breed').val(animalData[0].animalBreed_Desc);
+         
+      });
+        
+
+      }
+    });
+
+   
     
     //Add new Animal AJAX post
     //--------------------------------------------------------
@@ -219,6 +253,7 @@ $( document ).ready(function() {
 		newTr.append("<td>" + meds + "</td>");
 		newTr.append("<td>" + notes + "</td>");
 		newTr.append("<td><a style='cursor:pointer;color:red' class='btn btn-default edit-animal' data-toggle='modal' data-target='#addAnimal' data-animalid =" + animalData.id + ">Edit</a></td>");
+    newTr.append("<td><a style='cursor:pointer;color:red' class='btn btn-default remove-animal' data-toggle='modal' data-target='#removeAnimal' data-animalid =" + animalData.id + ">Remove</a></td>");
 
 		return newTr;
 	}
