@@ -254,7 +254,7 @@ $( document ).ready(function() {
 		newTr.append("<td>" + meds + "</td>");
 		newTr.append("<td>" + notes + "</td>");
 		newTr.append("<td><a style='cursor:pointer;color:red' class='btn btn-default edit-animal' data-toggle='modal' data-target='#addAnimal' data-animalid =" + animalData.id + ">Edit</a></td>");
-    newTr.append("<td><a style='cursor:pointer;color:red' class='btn btn-default remove-animal' data-toggle='modal' data-target='#removeAnimal' data-animalid =" + animalData.id + ">Remove</a></td>");
+    //newTr.append("<td><a style='cursor:pointer;color:red' class='btn btn-default remove-animal' data-toggle='modal' data-target='#removeAnimal' data-animalid =" + animalData.id + ">Remove</a></td>");
 
 		return newTr;
 	}
