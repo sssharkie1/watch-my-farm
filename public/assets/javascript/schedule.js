@@ -47,7 +47,7 @@ $( document ).ready(function() {
       tripDiv.append("<p>For dates:</p>");;
       tripDiv.append("<p>" + moment(tripData.startDate).format('MM/DD/YYYY') + " - " + moment(tripData.endDate).format('MM/DD/YYYY') + "</p>");
       tripDiv.append("<p>Use Link:</p>");
-      tripDiv.append("<p>" + tripData.magicalLink + "</p>");
+      tripDiv.append("<a href =" + tripData.magicalLink + " target='_blank'>" + tripData.magicalLink + "</a>");
 
       return tripDiv;
     }
