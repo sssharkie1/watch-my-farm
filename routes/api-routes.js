@@ -20,7 +20,7 @@ var shortid = require('shortid');
 var isAuthenticated = require("../config/middleware/isAuthenticated");
   
 //Site url
-var siteURL = "http://localhost:8000/";
+var siteURL = "https://stormy-everglades-67032.herokuapp.com/";
 
 //Current date
 var dateFormat = 'MM-DD-YYYY';
