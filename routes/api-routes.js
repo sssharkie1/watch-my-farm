@@ -222,6 +222,22 @@ module.exports = function(app) {
 
   });
 
+  // GET route for getting farm Information for the duties page
+  app.get("/api/farminfo/:farmid",function(req, res) {
+
+    db.farm.findAll({
+      where: {
+        id: req.params.farmid
+       },
+       attributes: ['user_email', 'first_name', 'last_name', 'cellPhone', 'emergencyNumber', 'emergencyName', 'vetName', 'vetNumber']
+     }).then(function(dbFarminfo){
+
+      res.json(dbFarminfo);
+
+    });
+
+  });
+
   // PUT route for updating farm. The updated farm will be available in req.body
   app.put("/api/farm",isAuthenticated, function(req, res) {
 
