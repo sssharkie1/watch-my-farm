@@ -166,8 +166,29 @@ a:hover, a:focus {
 
 }
 
+.parallax { 
+    /* The image used */
+    background-image: url(../images/geese.jpeg);
+
+    /* Set a specific height */
+    height: 400px; 
+    
+    
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .intro {
 	color: #1E211F;
+	margin: 50px;
+}
+
+#cover-text {
+	margin-top: 100px;
 }
 
 .red-button:hover, .red-button:focus, .red-button:active {
