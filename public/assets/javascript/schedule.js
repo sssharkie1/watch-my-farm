@@ -1,6 +1,7 @@
 $( document ).ready(function() {
 
   var errors = [];
+  var currDate = moment().format('MM/DD/YYYY');
 
 	// Logic for from and to dates from jquery ui datepicker widget
     $( function() {
@@ -93,6 +94,7 @@ $( document ).ready(function() {
     $('#scheduleTrip').on('click', function(event){
 
       errors = [];
+      $('#error-div').empty();
 
     	event.preventDefault();
 
@@ -119,6 +121,9 @@ $( document ).ready(function() {
       else if(moment(inEndDate).isBefore(inStartDate)){
         errors.push('Start date should be before the End date');
       }
+      else if((moment(inStartDate).isBefore(currDate)) || (moment(inEndDate).isBefore(currDate))){
+        errors.push('Start date or End date cannot be before today.');
+      }
     	else{
     		//If both dates are valid, check if EndDate is greater than start date
     		if(moment(inEndDate).isSameOrAfter(inStartDate)){
@@ -131,6 +136,8 @@ $( document ).ready(function() {
       if(errors.length !== 0){
         displayErrors(errors);
         return;
+      }else{
+
       }
 
     	console.log("isValid: " + isValid);
@@ -149,6 +156,10 @@ $( document ).ready(function() {
           if(data.valid){
             //window.location.href = "/schedule";
             //send ajax request to api/invite to get all the recent trip details
+            //clear the start date and enddate fields
+            $("#startDate").val('');
+            $("#endDate").val('');
+            console.log("Inside the post req, after clearing fields");
             getMyTrips();
           }
           else{
@@ -167,7 +178,7 @@ $( document ).ready(function() {
       //Loop through errors and display them to user using bootstrap alerts
       var html = "";
       for(var i=0; i<errors.length; i++){
-        html += "<div class = 'alert alert-danger'>" + errors[i].msg + "</div>"
+        html += "<div class = 'alert alert-danger'>" + errors[i] + "</div>"
       }
       console.log(html);
       $('#error-div').append(html);
