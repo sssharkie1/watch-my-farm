@@ -12,6 +12,7 @@ $( document ).ready(function() {
 	if(url.indexOf("?token=") !== -1){
 		token = url.split("=")[1];
 		getDuties(token);
+		
 	}
 
 	function createTaskRow(tasks){
@@ -23,22 +24,46 @@ $( document ).ready(function() {
 	    newTr.append("<td class='text-center'>" + tasks.food + "</td>");
 	    newTr.append("<td class='text-center'>" + tasks.meds + "</td>");
 	    newTr.append("<td class='text-center'>" + tasks.notes + "</td>");
-	    /*newTr.append("<td class='text-center'><form><input type='checkbox' class='completeTask' data-taskid = " + tasks.id + " value=" + tasks.id + " id = check-" + tasks.id + "></form></td>");
-*/
+
 	    //Update check box
 	    if(tasks.complete){
 	    	console.log("inside tasks complete " + tasks.complete);
 	    	newTr.append("<td class='text-center'><form><input type='checkbox' class='completeTask' data-taskid = " + tasks.id + " value=" + tasks.id + " id = check-" + tasks.id + " checked></form></td>");
-	    	/*$('#check-' + tasks.id).prop('checked', true);*/
+
 	    }else{
 	    	console.log("inside tasks complete " + tasks.complete);
 	    	newTr.append("<td class='text-center'><form><input type='checkbox' class='completeTask' data-taskid = " + tasks.id + " value=" + tasks.id + " id = check-" + tasks.id + "></form></td>");
-	    	/*$('#check-' + tasks.id).prop('checked', false);*/
+	   
 	    }
 
 
 	    return newTr;
 
+	}
+
+	function getFarmInfo(farmId){
+
+		var queryURL = "/api/farminfo/" + farmId;
+
+		$.get(queryURL, function(data){
+			console.log("Response from ajax /api/farmInfo: ", data);
+
+			if(data){	
+				var farmInfoDiv = 	$('<div>');
+				farmInfoDiv.addClass('text-center');
+				farmInfoDiv.append("<p>" + data[0].first_name + " " + data[0].last_name + "</p>");
+				farmInfoDiv.append("<p> Cell Phone: " + data[0].cellPhone + "</p>");
+				farmInfoDiv.append("<p> Email: " + data[0].user_email + "</p>");
+				farmInfoDiv.append("<p> Emergency Contact Name: " + data[0].emergencyName + "</p>");
+				farmInfoDiv.append("<p> Emergency Contact Number: " + data[0].emergencyNumber + "</p>");
+				farmInfoDiv.append("<p> Veterinarian Name: " + data[0].vetName + "</p>");
+				farmInfoDiv.append("<p> Veterinarian Number: " + data[0].vetNumber + "</p>");
+				$('#emergency-info').prepend(farmInfoDiv);
+
+			}
+			
+		});
+		
 	}
 
 	function getDuties(token){
@@ -55,6 +80,7 @@ $( document ).ready(function() {
 
 			if(data.isValid){	
 				getTasksForToday(data.farmId);
+				getFarmInfo(data.farmId); //get farm Info only if the token is valid
 			}else{
 				renderEmpty(data.message);
 			}
