@@ -15,6 +15,11 @@ var isAuthenticated = require("../config/middleware/isAuthenticated");
 module.exports = function(app) {
 
   // Each of the below routes just handles the HTML page that the user gets sent to.
+  // Route for home page
+  //--------------------------------------------
+  app.get("/", function(req, res) {
+      res.sendFile(path.join(__dirname + "/../public/about.html"));
+  });
 
   // When user clicks on the Sign up link, render the signup handlebars and override the default layout to use useraccount.hbs
   //------------------------------------------------
