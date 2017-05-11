@@ -16,7 +16,7 @@ API: Dark Sky API<br/>
 
 ## <a name="features"></a>Features
 
-![alt tag](http://g.recordit.co/iMjRJ29sYV.gif)
+![alt tag](./public/assets/images/login.gif)
 
 The WatchMyFarm application has login page with a form for existing users to sign in and a button for new users to create accounts.<br>
 Passwords are hashed and salted before storing in the MySQL database.
@@ -24,7 +24,7 @@ Passwords are hashed and salted before storing in the MySQL database.
 
 After the user logs in, the user is redirected to the Barnyard page, which displays all the animals and their information - Name, breed, Feed, Meds, Notes, etc using AJAX Get requests that fetch the data from the database corresponding to the logged in user. The barnyard page also has a side navigation panel that has links to the 'Schedule', 'My Farm', and the 'Payment' pages.<br>
 
-![alt tag](http://g.recordit.co/fAkydBDsJv.gif)
+![alt tag](./public/assets/images/new_animal.gif)
 
 The user can add a new Animal, along with its information by clicking the 'Add Animal' button on the Barnyard page, which displays a modal with form input fields.
 
@@ -33,10 +33,13 @@ When the form is submitted, after the user clicks 'Save' on the modal form, an A
 
 The user can then click the 'Edit' button to change the animal information at anytime. This shows the a modal with the existing animal information, and the user can change only the required fields. An AJAX call, updates the information in the database.
 
+- The user can update farm information on the Farm page via a modal and saves the form, an AJAX call posts the new farm information to the database.
 
-Other features not shown:
-- The user can c-------.
-- The user can -------------.
+![alt tag](./public/assets/images/the_farm.gif)
+
+- The user can schedule a period of time they will be gone and a link will be created with a unique token (using "ShortID") to send to the sitter. The sitter will use the link sent to them to access the daily duties, along with weather and farm information.  The sitter will mark duties as complete, and the user can monitor the sitter's progress. 
+
+![alt tag](./public/assets/images/schedule.gif)
 
 ## <a name="install"></a>Installation
 
