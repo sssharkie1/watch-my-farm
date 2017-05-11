@@ -146,9 +146,11 @@ $( document ).ready(function() {
     	if(farmInfo){
 
     		var modal = $(this);
+        modal.find('#first-name').val(farmInfo.first_name);
+        modal.find('#last-name').val(farmInfo.last_name);
     		modal.find('#farm-name').val(farmInfo.farmName);
   			modal.find('#farm-address').val(farmInfo.address);
-        modal.find('#zipcode').val(farmInfo.zipcode);        
+        modal.find('#farm-zipcode').val(farmInfo.zipcode);        
 	      modal.find('#email').val(farmInfo.user_email);
 	      modal.find('#farm-homePhone').val(farmInfo.homePhone);
 		    modal.find('#cell-phone').val(farmInfo.cellPhone);
@@ -189,7 +191,7 @@ $( document ).ready(function() {
     	var updFarmInfo = {
     		farmName: $('#farm-name').val().trim(), 
     		address: $('#farm-address').val().trim(),
-        zipcode: $('#zipcode').val().trim(),        
+        zipcode: $('#farm-zipcode').val().trim(),        
     		homePhone: $('#farm-homePhone').val().trim(),
     		cellPhone: $('#cell-phone').val().trim(),
     		emergencyName: $('#emer-name').val().trim(),
