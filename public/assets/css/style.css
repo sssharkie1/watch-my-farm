@@ -28,6 +28,22 @@ th {
 	font-size: 18px;
 }
 
+h4 {
+	font-family: 'Passion One', sans-serif;
+	text-align: center;
+	letter-spacing: 3px;
+	font-size: 32px;
+	color: #1E211F;
+	margin-bottom: 35px;
+	text-transform: uppercase;
+}
+
+.features-list{
+	color: #1E211F;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 16px;
+	text-align: left;
+}
 
 .larger-text {
 	font-size: 18px;
@@ -84,6 +100,10 @@ th {
 
 .light-text {
 	color: #EFFFF3;
+}
+
+.media-body {
+	text-align: left;
 }
 
 .small-head {
@@ -168,18 +188,30 @@ a:hover, a:focus {
 
 .parallax { 
     /* The image used */
-    background-image: url(../images/geese.jpeg);
-
+    background: 
+    /* top, transparent red, faked with gradient */ 
+    linear-gradient(
+      rgba(255, 0, 0, 0.25), 
+      rgba(255, 0, 0, 0.25)
+    ),
+    /* bottom, image */
+    url(../images/geese.jpeg);
     /* Set a specific height */
-    height: 400px; 
+    height: 450px;
+   
     
     
 
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
-    background-position: center;
+    background-position: top;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+section {
+	text-align: center;
+	padding: 30px;
 }
 
 .intro {
@@ -187,8 +219,18 @@ a:hover, a:focus {
 	margin: 50px;
 }
 
+.about-head {
+	padding: 20px;
+}
+
 #cover-text {
-	margin-top: 100px;
+	padding: 20px;
+	margin-top: 0px;
+	text-align: center;
+	font-family: 'Maiden Orange', sans-serif;
+	font-size: 42px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
 }
 
 .red-button:hover, .red-button:focus, .red-button:active {
