@@ -294,7 +294,7 @@ $( document ).ready(function() {
 	    	console.log(data);
 	    	farmInfo = data[0];
 	    	
-	      $('#farmTitle span').text(farmInfo.farmName);
+	      $('#c span').text(farmInfo.farmName);
 	      $('#address-fld').text(farmInfo.address);
         $('#zipcode-fld').text(farmInfo.zipcode);        
 	      $('#email-fld').text(farmInfo.user_email);

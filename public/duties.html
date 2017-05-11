@@ -49,7 +49,8 @@
 			<div class="col-sm-8">
 				<div class="main-area">
 					<h1 id = 'dutiesTitle' class="back-orange no-top-marg"><span id="currDate"></span> DUTIES </h1>
-					<div id="daily-weather"> maybe put weather here? </div><br><br>
+
+				</div><br><br>
 
 					<div id = 'AM-duties-list'>
 						<h2 class="text-center back-orange no-top-marg"> Morning: </h2>
@@ -60,7 +61,7 @@
 						      	<th class="text-center">Animal</th>
 						        <th class="text-center">Name</th>
 						        <th class="text-center">Feed</th>
-						        <th class="text-center">Meds</th>
+						        <th class="text-center">Meds</th>	
 						        <th class="text-center">Notes</th>
 						        <th class="text-center"> Complete?</th>
 
@@ -90,6 +91,14 @@
 						    </tbody>
 			 			 </table>
 					</div>
+					<h1 id = 'dutiesTitle' class="back-orange no-top-marg"><span id="currDate"></span> WEATHER </h1>
+				<div>
+					
+					<iframe id="forecast_embed" type="text/html" frameborder="0" height="245"
+width="100%"
+src="http://forecast.io/embed/#lat=35.9132&lon=-79.0558">
+</iframe>
+				</div>
 					<div class="col-sm-8">
 						<div class="main-area">
 							<h1 class="back-orange no-top-marg"> FARM INFO </h1>
@@ -109,6 +118,18 @@
     <script src="/assets/ext/moment.js"></script>
     <script src="/bundle.js"></script>
 	<script src = "/assets/javascript/duties.js"></script>
+
+<script>
+
+ var zip = '27349';
+ var url = 'https://api.darksky.net/forecast/5a343bbd0f8ebc16db2cb017da8ceb81/37.8267,-122.4233&APPID=5a343bbd0f8ebc16db2cb017da8ceb81'
+
+	  
+
+	  $.get(url,function(data){
+console.log(data)
+	  })
+</script>
 
 
 </body>
