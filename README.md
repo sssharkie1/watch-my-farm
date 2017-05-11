@@ -16,6 +16,7 @@ API: Dark Sky API<br/>
 
 ## <a name="features"></a>Features
 
+![alt tag](http://g.recordit.co/iMjRJ29sYV.gif)
 
 The WatchMyFarm application has login page with a form for existing users to sign in and a button for new users to create accounts.<br>
 Passwords are hashed and salted before storing in the MySQL database.
