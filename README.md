@@ -24,6 +24,8 @@ Passwords are hashed and salted before storing in the MySQL database.
 
 After the user logs in, the user is redirected to the Barnyard page, which displays all the animals and their information - Name, breed, Feed, Meds, Notes, etc using AJAX Get requests that fetch the data from the database corresponding to the logged in user. The barnyard page also has a side navigation panel that has links to the 'Schedule', 'My Farm', and the 'Payment' pages.<br>
 
+![alt tag](http://g.recordit.co/fAkydBDsJv.gif)
+
 The user can add a new Animal, along with its information by clicking the 'Add Animal' button on the Barnyard page, which displays a modal with form input fields.
 
 
