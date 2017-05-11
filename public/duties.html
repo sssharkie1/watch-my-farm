@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Duties</title>
+	<title>WatchMyFarm - Duties</title>
+
 	
 	<!-- Reset CSS -->
 	<link href="/assets/css/reset.css" rel="stylesheet">
@@ -38,24 +39,17 @@
 		</div><!-- ./row back-teal -->
 
 		<div class="row">
-			<div class="col-sm-2 col-sm-offset-1 back-orange">
-				<ul class="text-center">
-					<li> <h3> <a class="sid-nav-link" href="/barnyard"><i class="fa fa-paw fa-2x" aria-hidden="true"></i><br> BARNYARD </a> </h3> </li>
-					<li> <h3> <a class="sid-nav-link" href="/farminfo"><i class="fa fa-home fa-2x" aria-hidden="true"></i><br> MY FARM </a> </h3> </li>
-					<li> <h3> <a class="sid-nav-link" href="/schedule"><i class="fa fa-calendar fa-2x" aria-hidden="true"></i><br> SCHEDULE </a> </h3> </li>
-					<li> <h3> <a class="sid-nav-link" href="https://www.paypal.com/" target="_blank"><i class="fa fa-usd fa-2x" aria-hidden="true"></i><br> PAYMENT </a> </h3> </li>
-				</ul>
-			</div><!-- ./col-sm-2 col-sm-offset-1 back-orange -->
-			<div class="col-sm-8">
+			
+			<div class="col-sm-10 col-sm-offset-1">
 				<div class="main-area">
-					<h1 id = 'dutiesTitle' class="back-orange no-top-marg"><span id="currDate"></span> DUTIES </h1>
 
-				</div><br><br>
+					<h1 id = 'dutiesTitle' class="back-orange no-top-marg"><span id="currDate"></span> DAILY DUTIES </h1>
+					<div id="daily-weather"> </div>
 
 					<div id = 'AM-duties-list'>
-						<h2 class="text-center back-orange no-top-marg"> Morning: </h2>
+						<h2 class="text-center back-orange no-top-marg half-pad smaller-head-text"> MORNING: </h2>
 
-						<table class="table table-hover" id="amduties-table">
+						<table class="table table-responsive table-striped input-label" id="amduties-table">
 						    <thead>
 						      <tr>
 						      	<th class="text-center">Animal</th>
@@ -73,8 +67,8 @@
 					</div>
 
 					<div id = 'PM-duties-list'>
-						<h2 class="text-center back-orange no-top-marg"> Evening: </h2>
-						<table class="table table-hover" id="pmduties-table">
+						<h2 class="text-center back-orange no-top-marg half-pad smaller-head-text"> EVENING: </h2>
+						<table class="table table-responsive table-striped input-label" id="pmduties-table">
 						    <thead>
 						      <tr>
 						        <th class="text-center">Animal</th>
@@ -91,6 +85,7 @@
 						    </tbody>
 			 			 </table>
 					</div>
+          
 					<h1 id = 'dutiesTitle' class="back-orange no-top-marg"><span id="currDate"></span> WEATHER </h1>
 				<div>
 					
@@ -99,13 +94,21 @@ width="100%"
 src="http://forecast.io/embed/#lat=35.9132&lon=-79.0558">
 </iframe>
 				</div>
-					<div class="col-sm-8">
+					<div class="col-sm-8 col-sm-offset-2">
 						<div class="main-area">
 							<h1 class="back-orange no-top-marg"> FARM INFO </h1>
-							<div id = 'emergency-info'>add farm info here</div>
+							<div id = 'emergency-info'></div>
 						</div>
 					</div>					
 				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="footer">
+				<a href="https://github.com/sssharkie1/watch-my-farm" class="hover-dark bord-right">GITHUB</a>
+				<a href="about.html" class="hover-dark">ABOUT US </a>
+				<p id="copyright" class="light-text larger-text"> © WATCH MY FARM 2017</p> 
 			</div>
 
 	

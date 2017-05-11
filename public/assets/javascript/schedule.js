@@ -1,21 +1,22 @@
 $( document ).ready(function() {
 
   var errors = [];
+  var currDate = moment().format('MM/DD/YYYY');
 
 	// Logic for from and to dates from jquery ui datepicker widget
     $( function() {
     var dateFormat = "mm/dd/yy",
       startDate = $( "#startDate" )
         .datepicker({
-          defaultDate: "+1w",
-          changeMonth: true
+          defaultDate: "+1w"
+          //changeMonth: true
         })
         .on( "change", function() {
           endDate.datepicker( "option", "minDate", getDate( this ) );
         }),
       endDate = $( "#endDate" ).datepicker({
-        defaultDate: "+1w",
-        changeMonth: true
+        defaultDate: "+1w"
+        //changeMonth: true
       })
       .on( "change", function() {
         startDate.datepicker( "option", "maxDate", getDate( this ) );
@@ -41,13 +42,13 @@ $( document ).ready(function() {
     function createTripRow(tripData){
       console.log(tripData);
 
-      var tripDiv = $('<div class="bord-orange col-md-6">');
+      var tripDiv = $('<div class="bord-orange col-md-6 add-pad">');
       tripDiv.addClass("text-center");
       //tripDiv.append("<h1 class='back-orange no-top-marg'>MAGIC LINK</h1>");
-      tripDiv.append("<p>For dates:</p>");;
-      tripDiv.append("<p>" + moment(tripData.startDate).format('MM/DD/YYYY') + " - " + moment(tripData.endDate).format('MM/DD/YYYY') + "</p>");
-      tripDiv.append("<p>Use Link:</p>");
-      tripDiv.append("<a href =" + tripData.magicalLink + " target='_blank'>" + tripData.magicalLink + "</a>");
+      tripDiv.append("<p class='larger-text'>For dates:</p>");;
+      tripDiv.append("<div class='dark-border'> <p>" + moment(tripData.startDate).format('MM/DD/YYYY') + " - " + moment(tripData.endDate).format('MM/DD/YYYY') + "</p></div>");
+      tripDiv.append("<p class='larger-text'>Use Link:</p>");
+      tripDiv.append("<div class='dark-border'> <a href =" + tripData.magicalLink + " target='_blank' class='dark-text-link'>" + tripData.magicalLink + "</a></div>");
 
       return tripDiv;
     }
@@ -93,6 +94,7 @@ $( document ).ready(function() {
     $('#scheduleTrip').on('click', function(event){
 
       errors = [];
+      $('#error-div').empty();
 
     	event.preventDefault();
 
@@ -119,6 +121,9 @@ $( document ).ready(function() {
       else if(moment(inEndDate).isBefore(inStartDate)){
         errors.push('Start date should be before the End date');
       }
+      else if((moment(inStartDate).isBefore(currDate)) || (moment(inEndDate).isBefore(currDate))){
+        errors.push('Start date or End date cannot be before today.');
+      }
     	else{
     		//If both dates are valid, check if EndDate is greater than start date
     		if(moment(inEndDate).isSameOrAfter(inStartDate)){
@@ -131,6 +136,8 @@ $( document ).ready(function() {
       if(errors.length !== 0){
         displayErrors(errors);
         return;
+      }else{
+
       }
 
     	console.log("isValid: " + isValid);
@@ -149,6 +156,10 @@ $( document ).ready(function() {
           if(data.valid){
             //window.location.href = "/schedule";
             //send ajax request to api/invite to get all the recent trip details
+            //clear the start date and enddate fields
+            $("#startDate").val('');
+            $("#endDate").val('');
+            console.log("Inside the post req, after clearing fields");
             getMyTrips();
           }
           else{
@@ -167,7 +178,7 @@ $( document ).ready(function() {
       //Loop through errors and display them to user using bootstrap alerts
       var html = "";
       for(var i=0; i<errors.length; i++){
-        html += "<div class = 'alert alert-danger'>" + errors[i].msg + "</div>"
+        html += "<div class = 'alert alert-danger'>" + errors[i] + "</div>"
       }
       console.log(html);
       $('#error-div').append(html);

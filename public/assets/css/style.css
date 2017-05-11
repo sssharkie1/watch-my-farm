@@ -19,6 +19,25 @@ h3 {
 p {
 	color: #1E211F;
 	font-family: 'Montserrat', sans-serif;
+	font-size: 16px;
+}
+
+th {
+	font-weight: bold;
+	text-transform: uppercase;
+	font-size: 18px;
+}
+
+
+.larger-text {
+	font-size: 18px;
+}
+
+.dark-border {
+	border: 1px solid #1E211F;
+	padding-top: 10px;
+	padding-bottom: 5px;
+	margin-bottom: 5px;
 }
 
 .dark-text-link {
@@ -52,9 +71,11 @@ p {
 }
 
 .footer {
+	padding: 30px;
 	margin-top: 400px;
 	background-color: #4CBF9E;
 	color: #EFFFF3;
+	text-align: center; 
 }
 
 .no-top-marg {
@@ -68,6 +89,20 @@ p {
 .small-head {
 	margin: 0px 20px 10px 20px;
 	padding: 10px 0px;
+}
+
+.smaller-head-text {
+	font-size: 24px;
+}
+
+.hover-dark {
+	text-decoration: underline;
+	padding: 5px 10px;
+	font-family: 'Montserrat', sans-serif;
+}
+
+.hover-dark:hover {
+	color: #9E1512;
 }
 
 i {
@@ -109,6 +144,10 @@ a:hover, a:focus {
 
 }
 
+#copyright {
+	margin-top: 10px;
+}
+
 .red-button {
 	display: inline-block;
   margin: 0 10px 0 0;
@@ -127,8 +166,29 @@ a:hover, a:focus {
 
 }
 
+.parallax { 
+    /* The image used */
+    background-image: url(../images/geese.jpeg);
+
+    /* Set a specific height */
+    height: 400px; 
+    
+    
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .intro {
 	color: #1E211F;
+	margin: 50px;
+}
+
+#cover-text {
+	margin-top: 100px;
 }
 
 .red-button:hover, .red-button:focus, .red-button:active {
@@ -181,6 +241,19 @@ a:hover, a:focus {
 	width: 95%;
 }
 
+
 #scheduleTripBody, #animals-table, #farmInfo {
 	padding: 30px;
+}
+
+.bord-right {
+	border-right: 2px solid #EFFFF3;
+}
+
+.add-pad {
+	padding: 30px;
+}
+
+.half-pad {
+	padding: 15px;
 }

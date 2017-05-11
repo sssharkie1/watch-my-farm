@@ -20,7 +20,7 @@ var shortid = require('shortid');
 var isAuthenticated = require("../config/middleware/isAuthenticated");
   
 //Site url
-var siteURL = "stormy-everglades-67032.herokuapp.com";
+var siteURL = "https://stormy-everglades-67032.herokuapp.com/";
 
 //Current date
 var dateFormat = 'MM-DD-YYYY';
@@ -217,6 +217,22 @@ module.exports = function(app) {
      }).then(function(dbFarmInfo){
 
       res.json(dbFarmInfo);
+
+    });
+
+  });
+
+  // GET route for getting farm Information for the duties page
+  app.get("/api/farminfo/:farmid",function(req, res) {
+
+    db.farm.findAll({
+      where: {
+        id: req.params.farmid
+       },
+       attributes: ['user_email', 'first_name', 'last_name', 'cellPhone', 'emergencyNumber', 'emergencyName', 'vetName', 'vetNumber']
+     }).then(function(dbFarminfo){
+
+      res.json(dbFarminfo);
 
     });
 
