@@ -186,6 +186,12 @@ a:hover, a:focus {
 
 }
 
+#about-body {
+	background-color: #4CBF9E;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
 .parallax { 
     /* The image used */
     background: 
@@ -197,21 +203,29 @@ a:hover, a:focus {
     /* bottom, image */
     url(../images/geese.jpeg);
     /* Set a specific height */
-    height: 450px;
+    height: 400px;
    
     
     
 
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
-    background-position: top;
+    background-position: 0px 50px;
     background-repeat: no-repeat;
     background-size: cover;
+
 }
 
 section {
+	background-color: #EFFFF3; 
 	text-align: center;
 	padding: 30px;
+	width: 100%;
+	margin: 0px;
+}
+
+header {
+
 }
 
 .intro {
@@ -223,8 +237,23 @@ section {
 	padding: 20px;
 }
 
+#about-footer {
+	border-top: 2px solid #EFFFF3;
+	margin-top: 0px;
+}
+
+#demo:hover {
+	background-color: #EFFFF3;
+}
+
+#demo-button {
+	background-color: #EFFFF3;
+	text-align: center;
+	padding: 40px;
+}
+
 #cover-text {
-	padding: 20px;
+	padding: 50px 20px 300px 20px;
 	margin-top: 0px;
 	text-align: center;
 	font-family: 'Maiden Orange', sans-serif;
