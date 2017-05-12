@@ -34,10 +34,20 @@ h4 {
 	letter-spacing: 3px;
 	font-size: 32px;
 	color: #1E211F;
-	margin-bottom: 35px;
+	margin-bottom: 60px;
 	text-transform: uppercase;
 }
 
+h5 {
+	font-family:  'Maiden Orange', sans-serif;
+	font-size: 28px;
+}
+
+.role {
+	font-style: italic;
+	border-top: 2px solid #FFB523;
+	padding-top: 15px; 
+}
 .features-list{
 	color: #1E211F;
 	font-family: 'Montserrat', sans-serif;
@@ -186,6 +196,12 @@ a:hover, a:focus {
 
 }
 
+#about-body {
+	background-color: #4CBF9E;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
 .parallax { 
     /* The image used */
     background: 
@@ -197,21 +213,100 @@ a:hover, a:focus {
     /* bottom, image */
     url(../images/geese.jpeg);
     /* Set a specific height */
-    height: 450px;
+    height: 700px;
    
     
     
 
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
-    background-position: top;
+    background-position: 0px 10px;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+.parallax-two {
+	/* The image used */
+    background: 
+    /* top, transparent red, faked with gradient */ 
+    linear-gradient(
+      rgba(255, 0, 0, 0.25), 
+      rgba(255, 0, 0, 0.25)
+    ),
+    /* bottom, image */
+    url(../images/sheep.jpg);
+    /* Set a specific height */
+    height: 500px;
+   
+    
+    
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: 0px 10px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax-three {
+	/* The image used */
+    background: 
+    /* top, transparent red, faked with gradient */ 
+    linear-gradient(
+      rgba(255, 0, 0, 0.25), 
+      rgba(255, 0, 0, 0.25)
+    ),
+    /* bottom, image */
+    url(../images/sunflowers.jpg);
+    /* Set a specific height */
+    height: 500px;
+   
+    
+    
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: 0px 10px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax-four {
+	/* The image used */
+    background: 
+    /* top, transparent red, faked with gradient */ 
+    linear-gradient(
+      rgba(255, 0, 0, 0.25), 
+      rgba(255, 0, 0, 0.25)
+    ),
+    /* bottom, image */
+    url(../images/barn.jpeg);
+    /* Set a specific height */
+    height: 500px;
+   
+    
+    
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: 0px 10px;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 section {
+	background-color: #EFFFF3; 
 	text-align: center;
 	padding: 30px;
+	width: 100%;
+	margin: 0px;
+}
+
+#about-header {
+	position: fixed;
+	top: 0;
+	width: 100%;
 }
 
 .intro {
@@ -223,8 +318,26 @@ section {
 	padding: 20px;
 }
 
+#team {
+	padding:100px;
+}
+#about-footer {
+	border-top: 2px solid #EFFFF3;
+	margin-top: 0px;
+}
+
+#demo:hover {
+	background-color: #4CBF9E;
+}
+
+#demo-button {
+	background-color: #EFFFF3;
+	text-align: center;
+	padding: 100px;
+}
+
 #cover-text {
-	padding: 20px;
+	padding: 50px 20px 300px 20px;
 	margin-top: 0px;
 	text-align: center;
 	font-family: 'Maiden Orange', sans-serif;

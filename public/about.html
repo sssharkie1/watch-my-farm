@@ -21,8 +21,8 @@
 	</head>
 
 	<body>
-		<div class="row back-teal">
-			<header>
+		<div class="row back-teal about-header">
+			<header class="about-header">
 				<div class="back-teal">
 					<div class="col-sm-5 col-sm-offset-1">
 						<div id="logo"> WATCH MY FARM </div>
@@ -34,7 +34,7 @@
 			</header>
 
 		</div>
-	<div class="container-fluid">
+	<div id="about-body" class="container-fluid">
 		<!-- header, who it's for, about the app, features coming soon, meet the team, learn more about our stack -->
 		
 		<!--<h1 class="intro"> Are you a hard working homesteader who worries about the farm while you are out of town? </h1> -->
@@ -42,7 +42,7 @@
 		<!--<img src="assets/images/sheep.jpg" alt="sheep" width="100%">-->
 		<div class="parallax"> <h2 id="cover-text"> Are you a hard working homesteader? <br> Enjoy a stress free vacation with WATCH MY FARM </h2></div>
 
-		<div class="section">
+		<section>
 			<h4> How does WATCH MY FARM work? </h4>
 			<div class="row">
 				<div class="col-md-4 col-md-offset-4">
@@ -54,11 +54,11 @@
 					</ol>
 				</div>
 			</div>
-		</div>
+		</section>
+		<div class="parallax-two"> </div>
+		
 
-		<img src="assets/images/sheep.jpg" alt="field of sunflowers" width="100%" height="10%">
-
-		<div class="section">
+		<section>
 			<h4> Future Features </h4>
 			<div class="row">
 				<div class="col-md-4 col-md-offset-4">
@@ -70,12 +70,14 @@
 						<li> iPad/mobile app </li>
 						<li> Farm sitter accounts with login </li> 
 					</ul>
-					<img src="assets/images/sunflowers.jpg" alt="geese" width="100%">
+					
 				</div>
 			</div>
-		</div>
+		</section>
 
-		<section>
+		<div class="parallax-three"> </div>
+
+		<section id="team">
 
 			<h4> Meet the Team </h4>
 
@@ -83,12 +85,11 @@
 				<div class="col-md-4">
 				<div class="media">
 	  				<div class="media-left">
-	      				<img class="media-object" src="..." alt="...">
+	      				<img class="media-object" src="assets/images/sarah.jpeg" alt="..." width="120px">
 	  				</div>
 	  				<div class="media-body">
 	    				<h5 class="media-heading">Sarah Stevens</h5>
-	    				<p><em>Database Dynamo</em></p>
-					    <p>Hi! I'm Sarah and here is a short bio about me wooohooo!</p>
+	    				<p class="role"><em>Database Dynamo</em></p>
 					    <p> Github | Portfolio </p>
 	  				</div>
 				</div>
@@ -96,12 +97,11 @@
 				<div class="col-md-4">
 				<div class="media">
 	  				<div class="media-left">
-	      				<img class="media-object" src="..." alt="...">
+	      				<img class="media-object" src="assets/images/jincy.jpeg" alt="..." width="120px">
 	  				</div>
 	  				<div class="media-body">
 	    				<h5 class="media-heading">Jincy George</h5>
-	    				<p><em>Routing Rockstar</em></p>
-					    <p>Hi! I'm Jincy and here is a short bio about me wooohooo!</p>
+	    				<p class="role">Routing Rockstar</p>
 					    <p> Github | Portfolio </p>
 	  				</div>
 				</div>
@@ -109,29 +109,30 @@
 				<div class="col-md-4">
 				<div class="media">
 	  				<div class="media-left">
-	      				<img class="media-object" src="..." alt="...">
+	      				<img class="media-object" src="assets/images/heather.jpeg" alt="..." width="120px">
 	  				</div>
 	  				<div class="media-body">
 	    				<h5 class="media-heading">Heather Seaman</h5>
-	    				<p><em>Styling Superstar</em></p>
-					    <p>Hi! I'm Heather and here is a short bio about me wooohooo!</p>
+	    				<p class="role"><em>Styling Superstar</em></p>
 					    <p> Github | Portfolio </p>
 	  				</div>
 				</div>
 				</div>
 			</div>
 		</section>
-			<img src="assets/images/barn.jpeg" alt="barn" width="100%">
-
-
-		<a href="/login" class="btn red-button"> DEMO </a>
 			
+			<div class="parallax-four"> </div>
+
+		<div id="demo-button">
+		<h4> TRY OUT WATCH MY FARM </h4>
+		<a href="/login" id="demo" class="btn red-button"> DEMO </a>
+		</div>	
 
 	</div>
-		<div class="footer">
+		<div id="about-footer" class="footer">
 				<a href="https://github.com/sssharkie1/watch-my-farm" class="hover-dark bord-right">GITHUB</a>
 				<a href="about.html" class="hover-dark">ABOUT US </a>
-				<p id="copyright" class="light-text larger-text">© WATCH MY FARM 2017</p> 
+				<p id="copyright" class="light-text larger-text"> WATCH MY FARM 2017</p> 
 			</div>
 
 
