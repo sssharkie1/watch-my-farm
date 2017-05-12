@@ -1,7 +1,7 @@
 {
   "development": {
-    "username": "sstevens",
-    "password": "Larryland102!",
+    "username": "root",
+    "password":null,
     "database": "farmDB",
     "host": "127.0.0.1",
     "port": 3306,
