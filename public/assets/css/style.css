@@ -1,17 +1,17 @@
 h1 {
-	color: #EFFFF3;
+	color: #660C0B;
 	font-family: 'Passion One', sans-serif;
 	text-align: center;
 	letter-spacing: 2px;
 }
 
 h2 {
-	color: #EFFFF3;
+	color: #660C0B;
 	font-family: 'Montserrat', sans-serif;
 }
 
 h3 {
-	color: #EFFFF3;
+	color: #660C0B;
 	font-family: 'Montserrat', sans-serif;
 	font-size: 18px;
 }
@@ -137,6 +137,7 @@ h5 {
 
 i {
 	margin-bottom: 8px;
+	color: #660C0B;
 }
 
 li {
@@ -154,7 +155,7 @@ a {
 
 .sid-nav-link:visited {
 	text-decoration: none;
-	color: #EFFFF3;
+	color: #660C0B;
 }
 
 a:hover, a:focus {
@@ -162,20 +163,28 @@ a:hover, a:focus {
 	text-decoration: none;
 }
 
+a.sid-nav-link {
+	color: #7C0F0D;
+}
+
 .sid-nav-link:active {
 	text-decoration: none;
 	text-decoration-style: none;
-	color: #EFFFF3;
+	color: #1E211F;
 }
 
 #logout:hover {
-	color: #9E1512;
-	border: 2px solid #9E1512;
+	color: #660C0B;
+	border: 2px solid #660C0B;
 
 }
 
 #copyright {
 	margin-top: 10px;
+}
+
+#add-animal-icon {
+	color: #1E211F;
 }
 
 .red-button {
@@ -189,8 +198,8 @@ a:hover, a:focus {
   box-shadow: none;
   border: none;
   border-radius: 0;
-  background-color: #9E1512;
-  color: #EFFFF3;
+  background-color: #98D6C4;
+  color: #1E211F;
   width: 50%;
   letter-spacing: 2px;
 
