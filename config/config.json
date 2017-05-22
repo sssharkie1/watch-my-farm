@@ -1,10 +1,10 @@
 {
   "development": {
-    "username": "root",
-    "password":null,
+    "username": "sstevens",
+    "password":"Larryland102!",
     "database": "farmDB",
     "host": "127.0.0.1",
-    "port": 8889,
+    "port": 3306,
     "dialect": "mysql"
   },
   "test": {
