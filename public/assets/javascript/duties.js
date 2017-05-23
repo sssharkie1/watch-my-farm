@@ -52,7 +52,7 @@ $( document ).ready(function() {
 				var farmInfoDiv = 	$('<div>');
 				farmInfoDiv.addClass('text-center');
 				farmInfoDiv.append("<p>" + data[0].first_name + " " + data[0].last_name + "</p>");
-				farmInfoDiv.append("<a href="tel:data[0].cellPhone"><p> Cell Phone: " + data[0].cellPhone + "</p></a>");
+				farmInfoDiv.append("<p> Cell Phone: " + data[0].cellPhone + "</p>");
 				farmInfoDiv.append("<p> Email: " + data[0].user_email + "</p>");
 				farmInfoDiv.append("<p> Emergency Contact Name: " + data[0].emergencyName + "</p>");
 				farmInfoDiv.append("<p> Emergency Contact Number: " + data[0].emergencyNumber + "</p>");
