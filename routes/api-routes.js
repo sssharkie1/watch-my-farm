@@ -20,8 +20,8 @@ var shortid = require('shortid');
 var isAuthenticated = require("../config/middleware/isAuthenticated");
   
 //Site url
-//var siteURL = "https://stormy-everglades-67032.herokuapp.com/";
-var siteURL = "http://localhost:8000/";
+var siteURL = "https://stormy-everglades-67032.herokuapp.com/";
+//var siteURL = "http://localhost:8000/";
 //Current date
 var dateFormat = 'MM-DD-YYYY';
 var currDate = moment().format('YYYY/MM/DD');
