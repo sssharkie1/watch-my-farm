@@ -463,7 +463,9 @@ module.exports = function(app) {
                 farmId: res.locals.farmid
               }
             }).then(function(dbAnimals){
+              console.log("Getting all the animals in the tasks function")
               console.log(dbAnimals);
+              console.log("dbAnimals length: ", dbAnimals.length);
 
               if(dbAnimals || dbAnimals.length){
 
@@ -485,6 +487,7 @@ module.exports = function(app) {
                       animalId: dbAnimals[i].id
                     })
                     .then(function(dbNewTask){
+                      console.log("Printing the new task written to task table");
                       console.log(dbNewTask);
                     });
 
@@ -509,10 +512,11 @@ module.exports = function(app) {
 
                   }
 
-                  //Send back isValid true and farmId
-                  res.json({isValid: true, farmId: res.locals.farmid});
 
                 }
+
+                //Send back isValid true and farmId
+                res.json({isValid: true, farmId: res.locals.farmid});
 
               }
 
